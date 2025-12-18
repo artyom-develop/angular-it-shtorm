@@ -1,0 +1,63 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.offers {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  .container {
+    .offers__title {
+      @include lora-title(38px);
+      margin-bottom: 40px;
+    }
+
+    .offers__list {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      .offers__list-item {
+        width: 290px;
+        img {
+          border-radius: 5px;
+          width: 291px;
+          height: 291px;
+          margin-bottom: 15px;
+        }
+        .offers__list-title {
+          font-family: $montserrat-medium;
+          font-size: 20px;
+          color: #709fdc;
+          margin-bottom: 10px;
+        }
+        .offers__list-subtitle {
+          font-family: $montserrat-regular;
+          font-size: 14px;
+          line-height: 130%;
+          color: #071739;
+          margin-bottom: 15px;
+					max-width: 286px;
+					height: 90px;
+        }
+        .offers__list-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 21px;
+          .offers__list-price {
+            font-family: $montserrat-semiBold;
+            font-size: 20px;
+            line-height: 130%;
+            color: #709fdc;
+          }
+          .offers__list-btn {
+            width: 163px;
+            height: 51px;
+						background: #709fdc;
+						&:hover{
+							background: #618abf;
+						}
+          }
+        }
+      }
+    }
+  }
+}

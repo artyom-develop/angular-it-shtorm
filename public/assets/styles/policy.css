@@ -1,0 +1,106 @@
+html{
+  scroll-behavior: smooth;
+}
+
+.policy {
+  margin: 0 auto;
+	max-width: 1240px;
+
+  background: #fff;
+  border-radius: 14px;
+  font-family: 'Montserrat-Regular', Arial, sans-serif;
+  color: #071739;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.policy h1 {
+  font-family: 'Lora-Regular', serif;
+  font-size: 2.2em;
+  color: #709fdc;
+  margin-bottom: 0.7em;
+  font-weight: 400;
+}
+.policy h2 {
+  font-family: 'Montserrat-Medium', serif;
+  font-size: 1.4em;
+  color: #709fdc;
+  margin: 2em 0 1em 0;
+  font-weight: 400;
+}
+.policy h3 {
+  font-family: 'Montserrat-Medium', Arial, sans-serif;
+  font-size: 1.1em;
+  color: #709fdc;
+  margin: 1.5em 0 0.7em 0;
+  font-weight: 500;
+}
+.policy section {
+  margin-bottom: 2.2em;
+}
+.policy p {
+  margin: 0 0 1.1em 0;
+  color: #071739;
+}
+.policy ol {
+  margin-left: 1.7em;
+  color: #071739;
+  padding-left: 0.5em;
+}
+.policy ol li {
+  margin-bottom: 0.7em;
+  font-size: 1em;
+  line-height: 1.5;
+}
+.policy ol li::marker {
+  color: #709fdc;
+  font-weight: bold;
+}
+.policy .container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 600px) {
+  .policy {
+    padding: 16px 4vw;
+    font-size: 15px;
+  }
+  .policy h1 {
+    font-size: 1.3em;
+  }
+  .policy h2 {
+    font-size: 1.1em;
+  }
+}
+
+.policy {
+  background: #fff;
+  font-family: 'Montserrat-Regular', sans-serif;
+  color: #071739;
+  line-height: 130%;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+.policy h1,
+.policy h2,
+.policy h3 {
+  color: #709fdc;
+  line-height: 130%;
+  margin-top: 1.5em;
+}
+.policy ol {
+  margin-left: 1.5em;
+  color: #071739;
+}
+.policy section {
+  margin-bottom: 2em;
+}
+.policy p {
+  color: #071739;
+  line-height: 130%;
+}

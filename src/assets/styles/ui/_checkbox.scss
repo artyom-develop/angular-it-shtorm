@@ -1,0 +1,41 @@
+@use '../variables' as *;
+input {
+  width: 14px;
+  height: 14px;
+  min-height: 14px;
+  min-width: 14px;
+  border-radius: 3px;
+  border: 1px solid $checkbox_color;
+
+  // Скрыть стандартную галку
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+
+  &:checked {
+    border: 1px solid $second-color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      transition: all 0.3s ease;
+
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 10px;
+      transform: translate(-50%, -50%);
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='10' viewBox='0 0 12 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9L11 1' stroke='%23709fdc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}

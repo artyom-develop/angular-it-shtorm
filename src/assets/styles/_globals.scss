@@ -1,0 +1,136 @@
+@use 'variables' as *;
+@use 'ui/checkbox' as *;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: white;
+  font-size: 16px;
+  font-family: $montserrat-regular;
+  color: $base-color;
+}
+
+/* Сбрасываем почти все стили user agent */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Корректный box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Курсор для ссылок и кнопок */
+a,
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+/* Убираем маркеры списков */
+ul,
+ol,
+menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Изображения не вылезают из контейнера */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* Таблицы без промежутков между ячейками */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Фикс для placeholder */
+::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+/* Скрытые элементы по атрибуту hidden */
+[hidden] {
+  display: none !important;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 153px;
+  background-color: $second-color;
+  outline: none;
+  border: none;
+  font-family: $montserrat-medium;
+  font-size: 12px;
+  color: $white;
+  transition: all 0.3s ease;
+  text-align: center;
+  &:hover {
+    background-color: $second-color-active;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.form__error-block {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form__error-item {
+  font-size: 12px;
+  color: #e53935;
+  text-align: left;
+  position: relative;
+  padding-left: 3px;
+  font-family: $montserrat-regular;
+  line-height: 130%;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.form__error-block .form__error-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+.p-carousel-prev-button {
+  position: absolute;
+  top: 250px !important;
+  left: 11px !important;
+}
+
+.p-carousel-next-button {
+  position: absolute;
+  top: 250px !important;
+  right: 11px !important;
+}
+
+.p-carousel-content-container {
+  position: relative;
+}

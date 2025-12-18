@@ -1,0 +1,140 @@
+@use 'variables' as *;
+.slider {
+  padding-bottom: 60px;
+  .slider-container {
+    position: relative;
+  }
+
+  .container {
+    .promo-slide {
+      position: relative;
+      display: flex;
+
+      justify-content: space-between;
+      height: 500px;
+      width: 100%;
+      .promo-slide__ellipse {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9;
+      }
+      .promo-slide__right {
+        width: 750px;
+        height: 500px;
+
+        background-position: center;
+        z-index: 3;
+				position: absolute;
+				top:0;
+				right:0;
+      }
+      .promo-slide__left {
+        z-index: 10;
+        position: relative;
+        top: 100px;
+        left: 78px;
+				
+        .promo-slide__label {
+          font-family: $montserrat-semiBold;
+          font-size: 12px;
+          letter-spacing: 0.4em;
+          text-transform: uppercase;
+          color: #709fdc;
+        }
+        .promo-slide__title {
+          font-family: $lora-regular;
+          font-size: 50px;
+          line-height: 130%;
+          color: #fff;
+          margin-bottom: 40px;
+					max-width :610px;
+          span {
+            color: #709fdc;
+          }
+        }
+        .promo-slide__discription {
+          font-family: $montserrat-regular;
+          font-size: 24px;
+          line-height: 130%;
+          color: #fff;
+          margin-bottom: 50px;
+					max-width :456px;
+        }
+        .promo-slide__button {
+          border-radius: 5px;
+          width: 163px;
+          height: 51px;
+        }
+      }
+    }
+  }
+}
+
+/* Кастомные стрелки */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  color: #1b3f6b;
+
+  &:hover {
+    background: $second-color;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &--prev {
+    left: 11px;
+  }
+
+  &--next {
+    right: 11px;
+  }
+}
+
+/* Кастомные индикаторы (dots) */
+.custom-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.custom-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+
+  &--active {
+    background: #fff;
+  }
+}
+
+/* Скрываем стандартные элементы PrimeNG */
+::ng-deep {
+  .promo-carousel {
+    .p-carousel-indicators,
+    .p-carousel-prev,
+    .p-carousel-next {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+@use 'variables' as *;
+
+.header {
+  background-color: $white;
+  .container {
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo {
+      margin-right: 100px;
+      img {
+        width: 85px;
+        height: 47px;
+      }
+    }
+    nav {
+      margin-right: 237px;
+
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        font-size: 16px;
+        font-family: $montserrat-medium;
+        color: $base-color;
+
+        a {
+          transition: all 0.3s ease;
+          color: $base-color;
+          &:hover {
+            color: $second-color;
+          }
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .phone {
+      font-family: $montserrat-medium;
+      font-size: 16px;
+      color: $second-color;
+
+      .phone__number {
+        transition: border-bottom-color 0.5s ease;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        &:hover {
+          border-bottom-color: $second-color;
+        }
+      }
+    }
+    .header__profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: $montserrat-medium;
+      font-size: 16px;
+      color: $base-color;
+      .header__profile-info {
+        position: relative;
+        white-space: nowrap;
+        cursor: pointer;
+        font-family: $montserrat-medium;
+        font-size: 16px;
+      }
+      .header__profile-btn{
+         position: absolute;
+         width: 100%;
+         top: 30px;
+         left: 0;
+         cursor:pointer;
+      }
+    }
+  }
+}

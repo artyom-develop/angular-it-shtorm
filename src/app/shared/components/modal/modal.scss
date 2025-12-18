@@ -1,0 +1,114 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+.modal {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: 1.5px solid #709fdc;
+  border-radius: 10px;
+  width: 727px;
+  height: 489px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $white;
+  flex-direction: column;
+  z-index: 9999;
+  .modal__close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    svg {
+      &:hover {
+        line {
+          stroke: red;
+          fill: red;
+        }
+      }
+    }
+  }
+  .modal__title {
+    font-family: $lora-regular;
+    font-size: 38px;
+    color: #709fdc;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 443px;
+  }
+  .modal__subtitle {
+    font-family: $montserrat-medium;
+    font-size: 14px;
+    text-align: center;
+    color: #1e1a2b;
+    margin-bottom: 40px;
+  }
+  .modal__btn {
+    width: 73px;
+    height: 36px;
+    font-family: $montserrat-regular;
+    font-size: 12px;
+    color: #fff;
+  }
+
+  .modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .offers-label {
+      position: relative;
+
+      .offers__list {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        width: 422px;
+        max-height: 150px;
+        overflow-y: auto;
+        border: 1.5px solid #709fdc;
+        border-radius: 5px;
+        background: $white;
+        z-index: 10;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        .offer__list-item {
+          padding: 10px;
+          font-family: $montserrat-regular;
+          font-size: 14px;
+          color: $second-color;
+          background-color: $white;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+          &:hover {
+            background-color: #e8f0ff;
+          }
+        }
+      }
+    }
+    .modal__form-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .modal__form-input {
+        @include input(422px);
+        &.offers-input{
+					color: $second-color;
+				}
+      }
+    }
+    .modal__form-btn {
+      width: 422px;
+      height: 51px;
+      font-family: $montserrat-regular;
+      font-size: 16px;
+    }
+    .modal__error {
+      font-family: $montserrat-regular;
+      font-size: 14px;
+      color: red;
+      text-align: center;
+      margin-top: -10px;
+			max-width :422px;
+    }
+  }
+}
