@@ -91,9 +91,9 @@
       gap: 5px;
       .modal__form-input {
         @include input(422px);
-        &.offers-input{
-					color: $second-color;
-				}
+        &.offers-input {
+          color: $second-color;
+        }
       }
     }
     .modal__form-btn {
@@ -108,7 +108,7 @@
       color: red;
       text-align: center;
       margin-top: -10px;
-			max-width :422px;
+      max-width: 422px;
     }
   }
 }

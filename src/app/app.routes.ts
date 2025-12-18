@@ -10,16 +10,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/main/index').then((m) => m.Main),
+        loadComponent: () => import('./features/main/index').then(m => m.Main),
       },
       {
         path: 'login',
-        loadComponent: () => import('./features/auth/index').then((m) => m.Login),
+        loadComponent: () => import('./features/auth/index').then(m => m.Login),
         canActivate: [forwardGuard],
       },
       {
         path: 'signup',
-        loadComponent: () => import('./features/auth/index').then((m) => m.Signup),
+        loadComponent: () => import('./features/auth/index').then(m => m.Signup),
         canActivate: [forwardGuard],
       },
     ],

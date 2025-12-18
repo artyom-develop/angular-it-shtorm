@@ -1,12 +1,17 @@
 import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { ModalType } from '../../../types/modal/modalRequest.interface';
 import { OffersEnum } from '../../../types/offereEnum.enum';
+import { ClickHide } from '../../directives/click-hide';
 import { PhoneInputDeirective } from '../../directives/phone-input-deirective';
 import { ModalService } from '../../services/modal-service';
-import { ClickHide } from '../../directives/click-hide'
 
 @Component({
   selector: 'app-modal',
@@ -31,7 +36,7 @@ export class Modal {
       type: ModalType.order,
     },
   });
- 
+
   private timeOut: number | null = null;
 
   constructor() {
@@ -71,7 +76,11 @@ export class Modal {
     offer: [this.modalObj().offer, [Validators.required]],
     name: [
       '',
-      [Validators.required, Validators.minLength(2), Validators.pattern(/^[А-ЯЁA-Z][a-zа-яё]+$/)],
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(/^[А-ЯЁA-Z][a-zа-яё]+$/),
+      ],
     ],
     phone: ['', [Validators.required]],
   });
@@ -104,14 +113,18 @@ export class Modal {
           .subscribe({
             next: (data: DefaultResponse) => {
               if (data.error) {
-                this.isError.set('произошла ошибка при отправке формы, попробуйте еще раз');
+                this.isError.set(
+                  'произошла ошибка при отправке формы, попробуйте еще раз'
+                );
                 this.isThanks.set(false);
               } else {
                 this.isThanks.set(true);
               }
             },
-            error: (err) => {
-              this.isError.set('произошла ошибка при отправке формы, попробуйте еще раз');
+            error: err => {
+              this.isError.set(
+                'произошла ошибка при отправке формы, попробуйте еще раз'
+              );
               this.isThanks.set(false);
             },
           });
@@ -122,14 +135,18 @@ export class Modal {
           .subscribe({
             next: (data: DefaultResponse) => {
               if (data.error) {
-                this.isError.set('произошла ошибка при отправке формы, попробуйте еще раз');
+                this.isError.set(
+                  'произошла ошибка при отправке формы, попробуйте еще раз'
+                );
                 this.isThanks.set(false);
               } else {
                 this.isThanks.set(true);
               }
             },
-            error: (err) => {
-              this.isError.set('произошла ошибка при отправке формы, попробуйте еще раз');
+            error: err => {
+              this.isError.set(
+                'произошла ошибка при отправке формы, попробуйте еще раз'
+              );
               this.isThanks.set(false);
             },
           });

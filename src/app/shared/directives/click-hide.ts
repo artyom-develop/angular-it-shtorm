@@ -14,7 +14,7 @@ export class ClickHide {
       if (!(event.target as HTMLElement).closest(this.className)) {
         this.clickHideChange.emit(true);
       }
-    } 
+    }
     // Проверяем, находится ли target внутри элемента с директивой
     const clickedInside = this.elementRef.nativeElement.contains(event.target as Node);
 

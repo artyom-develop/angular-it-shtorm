@@ -6,10 +6,8 @@ export type SignupModel = z.infer<typeof SignupSchema>;
 export type LoginModel = z.infer<typeof LoginSchema>;
 
 const FullSchema = z.object({
-  firstName: z
-  .string()
-  .regex(/^[A-ZА-ЯЁ][a-zа-яё]+$/, { 
-    message: 'Имя должно начинаться с большой буквы и содержать только буквы' 
+  firstName: z.string().regex(/^[A-ZА-ЯЁ][a-zа-яё]+$/, {
+    message: 'Имя должно начинаться с большой буквы и содержать только буквы',
   }),
   email: z.string().email({ message: 'Некорректный email адрес' }),
   password: z
@@ -21,14 +19,13 @@ const FullSchema = z.object({
     }),
   agree: z
     .boolean()
-    .refine((val) => val === true, { message: 'Необходимо принять пользовательское соглашение' }),
+    .refine(val => val === true, { message: 'Необходимо принять пользовательское соглашение' }),
   rememberMe: z.boolean().optional(),
-  repeatPassword:  z
+  repeatPassword: z
     .string()
     .min(8, { message: '' })
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, {
-      message:
-        '',
+      message: '',
     }),
 });
 
@@ -44,7 +41,7 @@ export const SignupSchema = FullSchema.pick({
   password: true,
   repeatPassword: true,
   agree: true,
-}).refine((data) => data.password === data.repeatPassword, {
+}).refine(data => data.password === data.repeatPassword, {
   message: 'Пароли не совпадают',
   path: ['repeatPassword'],
 });

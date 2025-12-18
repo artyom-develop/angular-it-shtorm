@@ -112,7 +112,9 @@ table {
   line-height: 130%;
   opacity: 0;
   transform: translateY(-8px);
-  transition: opacity 0.25s, transform 0.25s;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
 }
 
 .form__error-block .form__error-item {

@@ -4,9 +4,10 @@
       <div class="signup__title">Регистрация на сайте</div>
       <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignup()">
         <label for="name" class="form__item">
-          @let firstNameErrors = getZodErrors('firstName'); @let invalidFirstName =
-          firstNameErrors.length > 0 && (signUpForm.get('firstName')?.touched ||
-          signUpForm.get('firstName')?.dirty);
+          @let firstNameErrors = getZodErrors('firstName');
+          @let invalidFirstName =
+            firstNameErrors.length > 0 &&
+            (signUpForm.get('firstName')?.touched || signUpForm.get('firstName')?.dirty);
           <input
             type="text"
             formControlName="firstName"
@@ -17,16 +18,18 @@
             [style.borderColor]="invalidFirstName ? 'red' : ''"
           />
         </label>
-        @if(firstNameErrors.length > 0 && invalidFirstName){
-        <div class="form__error-block">
-          @for ( err of firstNameErrors; track $index ) {
-          <span class="form__error-item">{{ err }}</span>
-          }
-        </div>
+        @if (firstNameErrors.length > 0 && invalidFirstName) {
+          <div class="form__error-block">
+            @for (err of firstNameErrors; track $index) {
+              <span class="form__error-item">{{ err }}</span>
+            }
+          </div>
         }
         <label for="email" class="form__item">
-          @let emailErrors = getZodErrors('email'); @let invalidEmail = emailErrors.length > 0 &&
-          (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty);
+          @let emailErrors = getZodErrors('email');
+          @let invalidEmail =
+            emailErrors.length > 0 &&
+            (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty);
           <input
             type="email"
             formControlName="email"
@@ -37,17 +40,18 @@
             [style.borderColor]="invalidEmail ? 'red' : ''"
           />
         </label>
-        @if(emailErrors.length > 0 && invalidEmail){
-        <div class="form__error-block">
-          @for ( err of emailErrors; track $index ) {
-          <span class="form__error-item">{{ err }}</span>
-          }
-        </div>
+        @if (emailErrors.length > 0 && invalidEmail) {
+          <div class="form__error-block">
+            @for (err of emailErrors; track $index) {
+              <span class="form__error-item">{{ err }}</span>
+            }
+          </div>
         }
         <label for="password" class="form__item">
-          @let passwordErrors = getZodErrors('password'); @let invalidPassword =
-          passwordErrors.length > 0 && (signUpForm.get('password')?.touched ||
-          signUpForm.get('password')?.dirty);
+          @let passwordErrors = getZodErrors('password');
+          @let invalidPassword =
+            passwordErrors.length > 0 &&
+            (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty);
           <input
             type="password"
             formControlName="password"
@@ -59,17 +63,18 @@
           />
         </label>
 
-        @if(passwordErrors.length > 0 && invalidPassword){
-        <div class="form__error-block">
-          @for ( err of passwordErrors; track $index ) {
-          <span class="form__error-item">{{ err }}</span>
-          }
-        </div>
+        @if (passwordErrors.length > 0 && invalidPassword) {
+          <div class="form__error-block">
+            @for (err of passwordErrors; track $index) {
+              <span class="form__error-item">{{ err }}</span>
+            }
+          </div>
         }
         <label for="repeatPassword" class="form__item">
-          @let repeatPasswordErrors = getZodErrors('repeatPassword'); @let invalidPasswordRepeat =
-          repeatPasswordErrors.length > 0 && (signUpForm.get('repeatPassword')?.touched ||
-          signUpForm.get('repeatPassword')?.dirty);
+          @let repeatPasswordErrors = getZodErrors('repeatPassword');
+          @let invalidPasswordRepeat =
+            repeatPasswordErrors.length > 0 &&
+            (signUpForm.get('repeatPassword')?.touched || signUpForm.get('repeatPassword')?.dirty);
           <input
             type="password"
             autocomplete="repeatPassword"
@@ -80,16 +85,20 @@
             [style.borderColor]="invalidPasswordRepeat ? 'red' : ''"
           />
         </label>
-        @if(repeatPasswordErrors.length > 0 && invalidPasswordRepeat){
-        <div class="form__error-block">
-          @for ( err of repeatPasswordErrors; track $index ) { @if(err){
-          <span class="form__error-item">{{ err }}</span>
-          } }
-        </div>
+        @if (repeatPasswordErrors.length > 0 && invalidPasswordRepeat) {
+          <div class="form__error-block">
+            @for (err of repeatPasswordErrors; track $index) {
+              @if (err) {
+                <span class="form__error-item">{{ err }}</span>
+              }
+            }
+          </div>
         }
         <label for="policy" class="form__item-policy">
-          @let agreeErrors = getZodErrors('agree'); @let invalidAgree = agreeErrors.length > 0 &&
-          (signUpForm.get('agree')?.touched || signUpForm.get('agree')?.dirty);
+          @let agreeErrors = getZodErrors('agree');
+          @let invalidAgree =
+            agreeErrors.length > 0 &&
+            (signUpForm.get('agree')?.touched || signUpForm.get('agree')?.dirty);
           <input
             type="checkbox"
             formControlName="agree"

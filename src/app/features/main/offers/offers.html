@@ -2,18 +2,18 @@
   <div class="container">
     <h2 class="offers__title">Услуги, которые мы предлагаем</h2>
     <div class="offers__list">
-      @for(offer of fullOffers; track $index){
-      <div class="offers__list-item">
-        <img src="{{offer.image}}" alt="" />
-        <div class="offers__list-title">{{offer.title}}</div>
-        <div class="offers__list-subtitle">
-          {{offer.subtitle}}
+      @for (offer of fullOffers; track $index) {
+        <div class="offers__list-item">
+          <img src="{{ offer.image }}" alt="" />
+          <div class="offers__list-title">{{ offer.title }}</div>
+          <div class="offers__list-subtitle">
+            {{ offer.subtitle }}
+          </div>
+          <div class="offers__list-bottom">
+            <div class="offers__list-price">От {{ offer.price }}₽</div>
+            <button class="btn offers__list-btn" (click)="modalOpen(offer.title)">Подробнее</button>
+          </div>
         </div>
-        <div class="offers__list-bottom">
-          <div class="offers__list-price">От {{offer.price}}₽</div>
-          <button class="btn offers__list-btn" (click)='modalOpen(offer.title)'>Подробнее</button>
-        </div>
-      </div>
       }
     </div>
   </div>

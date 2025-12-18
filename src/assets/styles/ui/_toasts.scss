@@ -1,11 +1,13 @@
-@use "../variables" as *;
+@use '../variables' as *;
 
-
-.p-toast-message-error, .p-toast-message-success, .p-toast-message-info, .p-toast-message-warn {
-	font-family: $montserrat-medium;
+.p-toast-message-error,
+.p-toast-message-success,
+.p-toast-message-info,
+.p-toast-message-warn {
+  font-family: $montserrat-medium;
   .p-toast-detail {
-		font-family: $montserrat-regular;
-		font-size: 16px;
+    font-family: $montserrat-regular;
+    font-size: 16px;
     color: black !important;
   }
 }

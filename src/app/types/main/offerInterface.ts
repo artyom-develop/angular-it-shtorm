@@ -1,8 +1,8 @@
-import { OffersEnum } from '../offereEnum.enum'
+import { OffersEnum } from '../offereEnum.enum';
 
-export interface OfferInterface{
-	image: string;
-	title: OffersEnum;
-	subtitle: string;
-	price: number;
+export interface OfferInterface {
+  image: string;
+  title: OffersEnum;
+  subtitle: string;
+  price: number;
 }

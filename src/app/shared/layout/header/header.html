@@ -1,4 +1,9 @@
-<div class="header" clickHide [className]="'header__profile-btn'" (clickHideChange)="clickHide($event)">
+<div
+  class="header"
+  clickHide
+  [className]="'header__profile-btn'"
+  (clickHideChange)="clickHide($event)"
+>
   <div class="container">
     <a class="logo header__logo" routerLink="/">
       <img src="assets/images/logo.png" alt="Логотип" />
@@ -61,14 +66,15 @@
           stroke-linejoin="round"
         />
       </svg>
-      @if(isLoggedIn() && userInfo() ){
-      <span class="header__profile-info" (click)="toggleMenu($event)" 
-        >Привет, {{ userInfo()!.name }}</span
-      >
-      @if(isShowMenu()){
-      <span class="btn header__profile-btn"   (click)="logout()"> Выйти </span>
-      } }@else{
-      <a routerLink="/login">Войти</a>
+      @if (isLoggedIn() && userInfo()) {
+        <span class="header__profile-info" (click)="toggleMenu($event)"
+          >Привет, {{ userInfo()!.name }}</span
+        >
+        @if (isShowMenu()) {
+          <span class="btn header__profile-btn" (click)="logout()"> Выйти </span>
+        }
+      } @else {
+        <a routerLink="/login">Войти</a>
       }
     </div>
   </div>

@@ -25,16 +25,16 @@
 
         background-position: center;
         z-index: 3;
-				position: absolute;
-				top:0;
-				right:0;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
       .promo-slide__left {
         z-index: 10;
         position: relative;
         top: 100px;
         left: 78px;
-				
+
         .promo-slide__label {
           font-family: $montserrat-semiBold;
           font-size: 12px;
@@ -48,7 +48,7 @@
           line-height: 130%;
           color: #fff;
           margin-bottom: 40px;
-					max-width :610px;
+          max-width: 610px;
           span {
             color: #709fdc;
           }
@@ -59,7 +59,7 @@
           line-height: 130%;
           color: #fff;
           margin-bottom: 50px;
-					max-width :456px;
+          max-width: 456px;
         }
         .promo-slide__button {
           border-radius: 5px;

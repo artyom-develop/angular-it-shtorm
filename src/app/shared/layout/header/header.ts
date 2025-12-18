@@ -83,11 +83,11 @@ export class Header {
       .logout()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (data) => {
+        next: data => {
           this.toastService.showToast(status.success, 'Успешно', 'Вы успешно вышли из системы.');
           this.router.navigate(['/']);
         },
-        error: (err) => {
+        error: err => {
           this.toastService.showToast(status.success, 'Успешно', 'Вы успешно вышли из системы.');
           this.router.navigate(['/']);
         },

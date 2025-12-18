@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { DefaultResponse } from '../../types/defaultResponse.interface';
 import { environment } from '../../../environments/environment';
 import { OfferInterface } from '../../types/main/offerInterface';
-import { OffersEnum } from '../../types/offereEnum.enum'
+import { OffersEnum } from '../../types/offereEnum.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class ModalService {
     offer: '',
     type: ModalType.order,
   });
-  
+
   isOpen$ = new BehaviorSubject<boolean>(false);
 
   setOffer(value: ModalObj) {
@@ -32,12 +32,15 @@ export class ModalService {
   }
 
   createOrder(order: ModalRequest): Observable<DefaultResponse> {
-    return this.http.post<DefaultResponse>(environment.apiUrl + '/requests', 
-      order,
-    );
+    return this.http.post<DefaultResponse>(environment.apiUrl + '/requests', order);
   }
 
-  offers: OffersEnum[] = [OffersEnum.WEBSITE_CREATION, OffersEnum.MARKETING, OffersEnum.ADVERTISING, OffersEnum.COPYWRITING];
+  offers: OffersEnum[] = [
+    OffersEnum.WEBSITE_CREATION,
+    OffersEnum.MARKETING,
+    OffersEnum.ADVERTISING,
+    OffersEnum.COPYWRITING,
+  ];
   fulOffers: OfferInterface[] = [
     {
       image: 'assets/images/main/offers/offer-1.png',

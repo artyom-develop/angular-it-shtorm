@@ -10,7 +10,6 @@
       [showIndicators]="false"
       [showNavigators]="false"
       styleClass="promo-carousel"
-      
     >
       <ng-template pTemplate="item" let-slide>
         <div class="promo-slide">
@@ -18,21 +17,21 @@
             <div class="promo-slide__label">
               {{ slide.label }}
             </div>
-            @if(slide.after){
-            <div
-              class="promo-slide__title"
-              [style]="{ 'margin-bottom': slide.description ? '20px' : '40px' }"
-            >
-              <span>{{ slide.accent }}</span
-              >{{ slide.title }}
-            </div>
-            }@else{
-            <div
-              class="promo-slide__title"
-              [style]="{ 'margin-bottom': slide.description ? '20px' : '40px' }"
-            >
-              {{ slide.title }}<span>{{ slide.accent }}</span>
-            </div>
+            @if (slide.after) {
+              <div
+                class="promo-slide__title"
+                [style]="{ 'margin-bottom': slide.description ? '20px' : '40px' }"
+              >
+                <span>{{ slide.accent }}</span
+                >{{ slide.title }}
+              </div>
+            } @else {
+              <div
+                class="promo-slide__title"
+                [style]="{ 'margin-bottom': slide.description ? '20px' : '40px' }"
+              >
+                {{ slide.title }}<span>{{ slide.accent }}</span>
+              </div>
             }
             <div class="promo-slide__discription">
               {{ slide.description }}
@@ -134,11 +133,11 @@
     <!-- Кастомные индикаторы (dots) -->
     <div class="custom-indicators">
       @for (slide of slides(); track slide; let i = $index) {
-      <button
-        class="custom-dot"
-        [class.custom-dot--active]="i === currentSlideIndex()"
-        (click)="goToSlide(i, $event)"
-      ></button>
+        <button
+          class="custom-dot"
+          [class.custom-dot--active]="i === currentSlideIndex()"
+          (click)="goToSlide(i, $event)"
+        ></button>
       }
     </div>
   </div>

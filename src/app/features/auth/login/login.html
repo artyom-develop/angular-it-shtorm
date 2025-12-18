@@ -2,31 +2,34 @@
   <div class="container">
     <div class="login__content">
       <h1 class="login__title">Войти в личный кабинет</h1>
-      <form class="form" [formGroup]='loginForm' (ngSubmit)="onLogin()">
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <label for="email" class="form__item">
-          @let emailErrors = getZodErrors('email'); @let invalidEmail = emailErrors.length > 0 &&
-          (loginForm.get('email')?.touched || loginForm.get('email')?.dirty);
+          @let emailErrors = getZodErrors('email');
+          @let invalidEmail =
+            emailErrors.length > 0 &&
+            (loginForm.get('email')?.touched || loginForm.get('email')?.dirty);
           <input
             type="email"
             formControlName="email"
             id="email"
             class="form__item-input"
             placeholder="Электронная почта"
-             autocomplete="email"
+            autocomplete="email"
             [style.borderColor]="invalidEmail ? 'red' : ''"
           />
         </label>
-        @if(emailErrors.length > 0 && invalidEmail){
-        <div class="form__error-block">
-          @for ( err of emailErrors; track $index ) {
-          <span class="form__error-item">{{ err }}</span>
-          }
-        </div>
+        @if (emailErrors.length > 0 && invalidEmail) {
+          <div class="form__error-block">
+            @for (err of emailErrors; track $index) {
+              <span class="form__error-item">{{ err }}</span>
+            }
+          </div>
         }
         <label for="password" class="form__item">
-          @let passwordErrors = getZodErrors('password'); @let invalidPassword =
-          passwordErrors.length > 0 && (loginForm.get('password')?.touched ||
-          loginForm.get('password')?.dirty);
+          @let passwordErrors = getZodErrors('password');
+          @let invalidPassword =
+            passwordErrors.length > 0 &&
+            (loginForm.get('password')?.touched || loginForm.get('password')?.dirty);
           <input
             type="password"
             formControlName="password"
@@ -38,17 +41,20 @@
           />
         </label>
 
-        @if(passwordErrors.length > 0 && invalidPassword){
-        <div class="form__error-block">
-          @for ( err of passwordErrors; track $index ) {
-          <span class="form__error-item">{{ err }}</span>
-          }
-        </div>
+        @if (passwordErrors.length > 0 && invalidPassword) {
+          <div class="form__error-block">
+            @for (err of passwordErrors; track $index) {
+              <span class="form__error-item">{{ err }}</span>
+            }
+          </div>
         }
         <label for="rememberMe" class="form__item-policy">
-          <input type="checkbox" class="form__item-checkbox"
-          formControlName="rememberMe"
-          id="rememberMe"  />
+          <input
+            type="checkbox"
+            class="form__item-checkbox"
+            formControlName="rememberMe"
+            id="rememberMe"
+          />
           <span> Запомнить меня </span>
         </label>
         <div class="form__action">

@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { status } from '../../types/statusType';
@@ -14,7 +13,6 @@ export class ToastService {
       summary: summary,
       detail: message,
       life: life || 4000,
-      
     });
   }
 

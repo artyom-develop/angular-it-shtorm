@@ -2,17 +2,14 @@ import { authInterceptor } from './../../core/interceptors/auth-interceptor';
 import { Injectable, Signal, signal } from '@angular/core';
 import { SliderInterface } from '../../types/main/sliderInterface.interface';
 import { OffersEnum } from '../../types/offereEnum.enum';
-import { Carousel } from 'primeng/carousel'
+import { Carousel } from 'primeng/carousel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SliderService {
-
-
-
- currentSlideIndex = signal(0);
-  autoplayIntervalSignal = signal(10000); 
+  currentSlideIndex = signal(0);
+  autoplayIntervalSignal = signal(10000);
 
   private autoplayTimeout: number | null = null;
 
@@ -50,8 +47,8 @@ export class SliderService {
       offer: OffersEnum.ADVERTISING,
     },
   ]);
-  
-  nextToSlide(event: MouseEvent, carousel: Carousel){
+
+  nextToSlide(event: MouseEvent, carousel: Carousel) {
     this.autoplayIntervalSignal.set(0);
 
     if (carousel) {
@@ -67,7 +64,7 @@ export class SliderService {
     }, 5000);
   }
 
-   prevToSlide(event: MouseEvent,carousel: Carousel) {
+  prevToSlide(event: MouseEvent, carousel: Carousel) {
     this.autoplayIntervalSignal.set(0);
 
     if (carousel) {
@@ -82,7 +79,7 @@ export class SliderService {
       this.autoplayIntervalSignal.set(10000);
     }, 5000);
   }
-  goToSlide(index: number, carousel: Carousel, event:MouseEvent) {
+  goToSlide(index: number, carousel: Carousel, event: MouseEvent) {
     this.autoplayIntervalSignal.set(0);
 
     if (carousel) {
