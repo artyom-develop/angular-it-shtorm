@@ -1,7 +1,12 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../core/auth/auth';
@@ -11,7 +16,6 @@ import { status } from '../../../types/statusType';
 import { LoginModel, LoginSchema, ValidateForm } from '../auth.schema';
 import { LoginResponse } from './../../../types/auth/loginResponse.interface';
 import { DefaultResponse } from './../../../types/defaultResponse.interface';
-
 @Component({
   selector: 'app-login',
   imports: [RouterModule, ReactiveFormsModule],
@@ -31,7 +35,14 @@ export class Login {
     password: [''],
     rememberMe: false,
   });
+  location = inject(Location);
   destroy$ = new Subject<void>();
+  isHidePassword = signal<boolean>(true);
+
+  togglePasswordVisibility() {
+    this.isHidePassword.set(!this.isHidePassword());
+  }
+
   constructor() {
     this.runZodValidation(this.loginForm.getRawValue() as LoginModel);
     this.loginForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -77,20 +88,43 @@ export class Login {
               }
 
               if (error) {
-                this.toastService.showToast(status.error, 'Ошибка', 'Ошибка входа.');
-                return; // Просто return
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  'Ошибка входа.'
+                );
+                return;
               }
 
-              this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+              this.authService.setTokens(
+                loginResponse.accessToken,
+                loginResponse.refreshToken
+              );
               this.authService.userId = loginResponse.userId;
-              this.toastService.showToast(status.success, 'Успех', 'Вы успешно вошли в систему.');
-              this.router.navigate(['/']);
+              this.toastService.showToast(
+                status.success,
+                'Успех',
+                'Вы успешно вошли в систему.'
+              );
+
+              // Небольшая задержка перед редиректом для стабилизации состояния
+              setTimeout(() => {
+                this.location.back();
+              }, 100);
             },
             error: (err: HttpErrorResponse) => {
               if (err.error && err.error.message) {
-                this.toastService.showToast(status.error, 'Ошибка', err.error.message);
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  err.error.message
+                );
               } else {
-                this.toastService.showToast(status.error, 'Ошибка', 'Ошибка авторизации.');
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  'Ошибка авторизации.'
+                );
               }
             },
           });

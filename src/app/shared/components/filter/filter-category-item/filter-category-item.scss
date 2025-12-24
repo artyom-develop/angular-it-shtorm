@@ -1,0 +1,26 @@
+@use "variables" as *;
+
+
+    .blog__filter-category {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+			cursor: pointer;
+      .blog__filter-category-text {
+        font-family: $montserrat-regular;
+        font-size: 16px;
+        color: #071739;
+
+        &.disabled {
+          color: #bebebe;
+        }
+      }
+			.blog__filter-category-enable,.blog__filter-category-disabled {
+				width: 14px;
+				display: flex;
+				justify-content: center;
+				align-items:center;
+			}
+    }
+

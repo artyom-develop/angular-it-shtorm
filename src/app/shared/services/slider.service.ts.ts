@@ -1,8 +1,7 @@
-import { authInterceptor } from './../../core/interceptors/auth-interceptor';
-import { Injectable, Signal, signal } from '@angular/core';
-import { SliderInterface } from '../../types/main/sliderInterface.interface';
-import { OffersEnum } from '../../types/offereEnum.enum';
+import { Injectable, signal } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
+import { SliderInterface } from '../../types/main/slider.interface.interface';
+import { OffersEnum } from '../../types/offereEnum.enum';
 
 @Injectable({
   providedIn: 'root',

@@ -1,11 +1,14 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { ModalRequest, ModalType } from '../../types/modal/modalRequest.interface';
-import { ModalObj } from '../../types/modal/modal-obj.interface';
 import { HttpClient } from '@angular/common/http';
-import { DefaultResponse } from '../../types/defaultResponse.interface';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { OfferInterface } from '../../types/main/offerInterface';
+import { DefaultResponse } from '../../types/defaultResponse.interface';
+import { ArticleInterface } from '../../types/main/offer.interface';
+import { ModalObj } from '../../types/modal/modal-obj.interface';
+import {
+  ModalRequest,
+  ModalType,
+} from '../../types/modal/modalRequest.interface';
 import { OffersEnum } from '../../types/offereEnum.enum';
 
 @Injectable({
@@ -32,7 +35,10 @@ export class ModalService {
   }
 
   createOrder(order: ModalRequest): Observable<DefaultResponse> {
-    return this.http.post<DefaultResponse>(environment.apiUrl + '/requests', order);
+    return this.http.post<DefaultResponse>(
+      environment.apiUrl + '/requests',
+      order
+    );
   }
 
   offers: OffersEnum[] = [
@@ -41,7 +47,7 @@ export class ModalService {
     OffersEnum.ADVERTISING,
     OffersEnum.COPYWRITING,
   ];
-  fulOffers: OfferInterface[] = [
+  fulOffers: ArticleInterface[] = [
     {
       image: 'assets/images/main/offers/offer-1.png',
       title: OffersEnum.WEBSITE_CREATION,

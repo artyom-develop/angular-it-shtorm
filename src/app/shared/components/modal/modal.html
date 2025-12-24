@@ -25,7 +25,7 @@
       />
     </svg>
   </div>
-  @if (!isThanks()) {
+  @if (!isThanks() && !loading()) {
     @if (isTypeOrder()) {
       <div class="modal__title">Заявка на услугу!</div>
     } @else {
@@ -44,12 +44,22 @@
             <input
               formControlName="offer"
               class="modal__form-input offers-input"
+              [style]="{
+                'border-radius': isShowOffers() ? '5px 5px 0 0' : '5px',
+              }"
               [value]="offerValue()"
               (click)="toggleShowOffers()"
               readonly
             />
             @if (isShowOffers()) {
-              <div class="offers__list">
+              <div
+                class="offers__list"
+                [style]="{
+                  'border-radius': isShowOffers() ? '0 0 5px 5px' : '5px',
+                }"
+                clickHide
+                (clickHideChange)="onHideOffers($event)"
+              >
                 @for (offer of offers; track $index) {
                   <div class="offer__list-item" (click)="choiceOffer(offer)">
                     {{ offer }}
@@ -92,6 +102,7 @@
           />
         </label>
       </div>
+
       @if (isTypeOrder()) {
         <button type="submit" class="btn modal__form-btn">
           Оставить заявку
@@ -105,6 +116,8 @@
         <span class="modal__error">{{ isError() }}</span>
       }
     </form>
+  } @else if (loading()) {
+    <app-loading></app-loading>
   } @else {
     <div class="modal__title">Спасибо за вашу заявку!</div>
     <div class="modal__subtitle">

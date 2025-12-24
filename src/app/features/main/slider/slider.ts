@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Carousel, CarouselModule } from 'primeng/carousel';
 import { ModalService } from '../../../shared/services/modal-service';
 import { SliderService } from '../../../shared/services/slider.service.ts';
-import { SliderInterface } from '../../../types/main/sliderInterface.interface';
+import { SliderInterface } from '../../../types/main/slider.interface.interface';
 import { ModalType } from '../../../types/modal/modalRequest.interface';
 import { OffersEnum } from '../../../types/offereEnum.enum';
 
@@ -43,7 +43,10 @@ export class Slider implements AfterViewInit {
       }
     });
     effect(() => {
-      if (this.autoplayIntervalSignal() !== this.sliderService.autoplayIntervalSignal()) {
+      if (
+        this.autoplayIntervalSignal() !==
+        this.sliderService.autoplayIntervalSignal()
+      ) {
         this.autoplayIntervalSignal = this.sliderService.autoplayIntervalSignal;
       }
     });
@@ -74,9 +77,11 @@ export class Slider implements AfterViewInit {
 
   ngAfterViewInit() {
     if (this.carousel) {
-      this.carousel.onPage.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event: any) => {
-        this.currentSlideIndex.set(event.page);
-      });
+      this.carousel.onPage
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((event: any) => {
+          this.currentSlideIndex.set(event.page);
+        });
     }
   }
 }

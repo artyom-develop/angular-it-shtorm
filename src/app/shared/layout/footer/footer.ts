@@ -8,4 +8,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './footer.scss',
   standalone: true,
 })
-export class Footer {}
+export class Footer {
+  date = new Date().getFullYear();
+}

@@ -1,0 +1,38 @@
+<div class="blog">
+  <div class="container">
+    <div class="blog__title">Блог</div>
+    <div class="blog__filters">
+      <div class="filter__labels">
+        @for (label of labels(); track $index) {
+          <app-filter-label
+            [categories]="categories()"
+            [label]="label"
+            [activeParams]="activateParams"
+          ></app-filter-label>
+        }
+      </div>
+      <category-filter
+        (categoriesOutput)="onCategoriesResult($event)"
+      ></category-filter>
+    </div>
+    <div class="blog__articles">
+      @if (isLoading()) {
+        <app-loading></app-loading>
+      } @else if (articles() && articles()!.length > 0) {
+        @for (article of articles()!; track $index) {
+          <article-card [article]="article"></article-card>
+        }
+      } @else {
+        <span>Ничего не найдено</span>
+      }
+    </div>
+    @if (
+      categories().length > 0 && categories() && pages() && pages().length > 1
+    ) {
+      <app-pagination
+        [activeParams]="activateParams"
+        [pages]="pages()"
+      ></app-pagination>
+    }
+  </div>
+</div>

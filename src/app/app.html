@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
 @if (isOpen()) {
-  <app-modal></app-modal>
+  <app-modal  animate.leave='scale-out' animate.enter='scale-in'></app-modal>
 }
-<p-toast position="bottom-right"></p-toast>
+<p-toast position="bottom-center"></p-toast>

@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @use 'ui/checkbox' as *;
+@use 'mixins' as *;
 * {
   margin: 0;
   padding: 0;
@@ -12,10 +13,12 @@ body {
   font-size: 16px;
   font-family: $montserrat-regular;
   color: $base-color;
-}
 
-/* Сбрасываем почти все стили user agent */
-*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  scroll-behavior: smooth; // Плавная прокрутка
+} /* Сбрасываем почти все стили user agent */
+*:where(
+  :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+) {
   all: unset;
   display: revert;
 }
@@ -135,4 +138,63 @@ table {
 
 .p-carousel-content-container {
   position: relative;
+}
+
+p-carousel-item.p-carousel-item-active.p-carousel-item-end {
+  min-width: 396px;
+  width: 396px;
+}
+.p-carousel-item.p-carousel-item-active {
+  min-width: 396px;
+  width: 396px;
+}
+.p-carousel-item {
+  min-width: 396px;
+  width: 396px;
+}
+
+svg {
+  cursor: pointer;
+}
+
+h3 {
+  font-family: $montserrat-medium;
+  font-size: 20px;
+  margin-bottom: 20px;
+  line-height: 130%;
+  color: #709fdc;
+}
+p {
+  font-family: $montserrat-regular;
+  font-size: 14px;
+  line-height: 130%;
+  color: #071739;
+  margin-bottom: 20px;
+}
+br {
+  margin-bottom: 40px;
+}
+
+ul {
+  padding-left: 10px;
+  li {
+    margin-bottom: 10px;
+    font-family: $montserrat-regular;
+    font-size: 14px;
+    line-height: 130%;
+    color: #071739;
+    &::before {
+      content: '• ';
+      color: $base-color;
+      margin-right: 10px;
+    }
+  }
+}
+
+.hide-password {
+  position: absolute;
+  top: calc(50% - 11px);
+  right: 15px;
+
+  cursor: pointer;
 }

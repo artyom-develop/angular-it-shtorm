@@ -1,6 +1,6 @@
 import { OffersEnum } from '../offereEnum.enum';
 
-export interface OfferInterface {
+export interface ArticleInterface {
   image: string;
   title: OffersEnum;
   subtitle: string;

@@ -2,10 +2,14 @@ import { Component, inject } from '@angular/core';
 import { ModalService } from '../../../shared/services/modal-service';
 import { Offers } from '../offers/offers';
 import { Slider } from '../slider/slider';
+import { Advantages } from "../advantages/advantages";
+import { Populars } from "../populars/populars";
+import { Comments } from "../comments/comments";
+import { Map } from "../map/map";
 
 @Component({
   selector: 'app-main',
-  imports: [Slider, Offers],
+  imports: [Slider, Offers, Advantages, Populars, Comments, Map],
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })

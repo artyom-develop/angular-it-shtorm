@@ -1,15 +1,15 @@
+import { ViewportScroller } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, DestroyRef, effect, HostListener, inject, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../core/auth/auth';
 import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { status } from '../../../types/statusType';
 import { UserResponse } from '../../../types/user/userResponse.interface';
+import { ClickHide } from '../../directives/click-hide';
 import { ToastService } from '../../services/toast';
 import { UserService } from '../../services/user';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { ClickHide } from '../../directives/click-hide';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +23,7 @@ export class Header {
   private authService = inject(AuthService);
   private toastService = inject(ToastService);
   private destroyRef = inject(DestroyRef);
+  private viewportScroller = inject(ViewportScroller);
 
   isLoggedIn = toSignal(this.authService.isLogged$, { initialValue: false });
   userInfo = toSignal<UserResponse | null>(this.userService.userInfo$, {
@@ -30,6 +31,14 @@ export class Header {
   });
 
   isShowMenu = signal<boolean>(false);
+
+  navigateWithFragment(route: string, fragment: string) {
+    this.router.navigate([route], { fragment }).then(() => {
+      setTimeout(() => {
+        this.viewportScroller.scrollToAnchor(fragment);
+      }, 100);
+    });
+  }
 
   toggleMenu(event: Event) {
     event.stopPropagation();
@@ -45,6 +54,7 @@ export class Header {
     effect(() => {
       if (this.isLoggedIn() && this.authService.getTokens().accessToken) {
         this.loadUser();
+        this.isShowMenu.set(false);
       }
     });
   }
@@ -63,10 +73,15 @@ export class Header {
         },
         error: (err: HttpErrorResponse) => {
           if (err.error.message) {
-            this.toastService.showToast(status.error, 'Ошибка', err.error.message);
+            this.toastService.showToast(
+              status.error,
+              'Ошибка',
+              err.error.message
+            );
             this.clearDataUser();
             return;
           }
+          
           this.clearDataUser();
         },
       });
@@ -84,11 +99,19 @@ export class Header {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: data => {
-          this.toastService.showToast(status.success, 'Успешно', 'Вы успешно вышли из системы.');
+          this.toastService.showToast(
+            status.success,
+            'Успешно',
+            'Вы успешно вышли из системы.'
+          );
           this.router.navigate(['/']);
         },
         error: err => {
-          this.toastService.showToast(status.success, 'Успешно', 'Вы успешно вышли из системы.');
+          this.toastService.showToast(
+            status.success,
+            'Успешно',
+            'Вы успешно вышли из системы.'
+          );
           this.router.navigate(['/']);
         },
       });

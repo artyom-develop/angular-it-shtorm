@@ -18,6 +18,7 @@
         display: flex;
         flex-direction: column;
         .form__item {
+            position: relative;
           &:not(:last-child) {
             margin-bottom: 5px;
           }
@@ -26,6 +27,7 @@
           }
           .form__item-input {
             @include input(422px);
+          
             &::placeholder {
               font-family: $montserrat-regular;
               font-size: 14px;
@@ -33,6 +35,7 @@
               color: #a8aba7;
             }
           }
+        
         }
         .form__item-policy {
           display: flex;

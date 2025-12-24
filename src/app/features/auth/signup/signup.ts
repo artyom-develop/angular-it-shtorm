@@ -1,5 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 import { UserService } from './../../../shared/services/user';
 import { SignupSchema } from './../auth.schema';
 
@@ -15,7 +19,7 @@ import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { status } from '../../../types/statusType';
 import { UserResponse } from '../../../types/user/userResponse.interface';
 import { SignupModel, ValidateForm } from '../auth.schema';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-signup',
   imports: [RouterModule, ReactiveFormsModule],
@@ -37,9 +41,17 @@ export class Signup {
     repeatPassword: [''],
     agree: false,
   });
-
+  location = inject(Location);
   destroy$ = new Subject<void>();
+  isHidePassword =  signal<boolean>(true);
+  isHideRepeatPassword = signal<boolean>(true);
 
+  toggleRepeatPasswordVisibility() {
+    this.isHideRepeatPassword.set(!this.isHideRepeatPassword());
+  }
+  togglePasswordVisibility() {
+    this.isHidePassword.set(!this.isHidePassword());
+  }
   constructor() {
     this.runZodValidation(this.signUpForm.getRawValue() as SignupModel);
     this.signUpForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
@@ -84,24 +96,43 @@ export class Signup {
               }
 
               if (error) {
-                this.toastService.showToast(status.error, 'Ошибка', 'Ошибка регистрации.');
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  'Ошибка регистрации.'
+                );
                 return;
               }
 
-              this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+              this.authService.setTokens(
+                loginResponse.accessToken,
+                loginResponse.refreshToken
+              );
               this.authService.userId = loginResponse.userId;
               this.toastService.showToast(
                 status.success,
                 'Успех',
                 'Вы успешно зарегистрировались в системе.'
               );
-              this.router.navigate(['/']);
+
+              // Небольшая задержка перед редиректом для стабилизации состояния
+              setTimeout(() => {
+                this.location.back();
+              }, 100);
             },
             error: (err: HttpErrorResponse) => {
               if (err.error && err.error.message) {
-                this.toastService.showToast(status.error, 'Ошибка', err.error.message);
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  err.error.message
+                );
               } else {
-                this.toastService.showToast(status.error, 'Ошибка', 'Ошибка регистрации.');
+                this.toastService.showToast(
+                  status.error,
+                  'Ошибка',
+                  'Ошибка регистрации.'
+                );
               }
             },
           });
@@ -147,13 +178,21 @@ export class Signup {
             'Успех',
             'Вы успешно зарегистрировались в системе.'
           );
-          this.router.navigate(['/']);
+          this.location.back();
         },
         error: (err: HttpErrorResponse) => {
           if (err.error && err.error.message) {
-            this.toastService.showToast(status.error, 'Ошибка', err.error.message);
+            this.toastService.showToast(
+              status.error,
+              'Ошибка',
+              err.error.message
+            );
           } else {
-            this.toastService.showToast(status.error, 'Ошибка', 'Ошибка получения данных.');
+            this.toastService.showToast(
+              status.error,
+              'Ошибка',
+              'Ошибка получения данных.'
+            );
           }
         },
       });

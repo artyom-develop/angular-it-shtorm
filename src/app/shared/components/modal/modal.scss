@@ -61,7 +61,7 @@
 
       .offers__list {
         position: absolute;
-        top: 56px;
+        top: 52px;
         left: 0;
         width: 422px;
         max-height: 150px;
@@ -80,7 +80,8 @@
           cursor: pointer;
           transition: background-color 0.2s ease;
           &:hover {
-            background-color: #e8f0ff;
+            background-color: $second-color;
+            color: $white;
           }
         }
       }
@@ -112,3 +113,5 @@
     }
   }
 }
+
+

@@ -5,9 +5,52 @@
 .p-toast-message-info,
 .p-toast-message-warn {
   font-family: $montserrat-medium;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  margin-bottom: 12px !important;
+
+  .p-toast-summary {
+    font-family: $montserrat-semiBold;
+    font-size: 16px;
+    color: $white !important;
+    margin-bottom: 4px;
+  }
+
   .p-toast-detail {
     font-family: $montserrat-regular;
-    font-size: 16px;
-    color: black !important;
+    font-size: 14px;
+    color: $white !important;
+    line-height: 1.4;
   }
+
+  .p-toast-icon-close {
+    color: $white !important;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.p-toast-close-icon{
+  path{
+        fill: $white !important;
+
+  }
+}
+
+.p-toast-message-success {
+  background: linear-gradient(135deg, #4caf50, #45a049) !important;
+}
+
+.p-toast-message-error {
+  background: linear-gradient(135deg, #f44336, #d32f2f) !important;
+}
+
+.p-toast-message-warn {
+  background: linear-gradient(135deg, #ff9800, #f57c00) !important;
+}
+
+.p-toast-message-info {
+  background: linear-gradient(135deg, #2196f3, #1976d2) !important;
 }

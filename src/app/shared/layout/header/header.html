@@ -1,9 +1,4 @@
-<div
-  class="header"
-  clickHide
-  [className]="'header__profile-btn'"
-  (clickHideChange)="clickHide($event)"
->
+<div class="header">
   <div class="container">
     <a class="logo header__logo" routerLink="/">
       <img src="assets/images/logo.png" alt="Логотип" />
@@ -12,19 +7,31 @@
     <nav>
       <ul class="menu">
         <li class="menu__item">
-          <a class="menu__link" routerLink="/">Услуги</a>
+          <a class="menu__link" (click)="navigateWithFragment('/', 'offers')"
+            >Услуги</a
+          >
         </li>
         <li class="menu__item">
-          <a class="menu__link" routerLink="/">О нас</a>
+          <a
+            class="menu__link"
+            (click)="navigateWithFragment('/', 'advantages')"
+            >О нас</a
+          >
         </li>
         <li class="menu__item">
-          <a class="menu__link" routerLink="/">Статьи</a>
+          <a class="menu__link" routerLink="/blog" [routerLinkActive]="'active'"
+            >Статьи</a
+          >
         </li>
         <li class="menu__item">
-          <a class="menu__link" routerLink="/">Отзывы</a>
+          <a class="menu__link" (click)="navigateWithFragment('/', 'comments')"
+            >Отзывы</a
+          >
         </li>
         <li class="menu__item">
-          <a class="menu__link" routerLink="/">Контакты</a>
+          <a class="menu__link" (click)="navigateWithFragment('/', 'contacts')"
+            >Контакты</a
+          >
         </li>
       </ul>
     </nav>
@@ -33,7 +40,9 @@
       class="phone header__phone"
       [style]="{ 'margin-right': userInfo() ? '89px' : '141px' }"
     >
-      <a href="tel:+7 (499) 343-13-34" class="phone__number">+7 (499) 343-13-34</a>
+      <a href="tel:+7 (499) 343-13-34" class="phone__number"
+        >+7 (499) 343-13-34</a
+      >
     </address>
 
     <div class="header__profile">
@@ -71,7 +80,16 @@
           >Привет, {{ userInfo()!.name }}</span
         >
         @if (isShowMenu()) {
-          <span class="btn header__profile-btn" (click)="logout()"> Выйти </span>
+          <span
+            class="btn header__profile-btn"
+            clickHide
+            (clickHideChange)="clickHide($event)"
+            (click)="logout()"
+            animate.enter="fade-in"
+            animate.leave="fade-out"
+          >
+            Выйти
+          </span>
         }
       } @else {
         <a routerLink="/login">Войти</a>

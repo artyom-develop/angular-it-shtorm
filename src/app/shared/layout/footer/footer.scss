@@ -27,7 +27,14 @@
           align-items: center;
           gap: 20px;
           font-size: 16px;
-
+          li{
+            &::before{
+              content: '';
+            }
+            &::after{
+              content: '';
+            }
+          }
           a {
             transition: all 0.3s ease;
             color: $base-color;
