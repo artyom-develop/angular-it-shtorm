@@ -15,7 +15,6 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 40px;
       .filter__labels {
         max-width: 608px;
         display: flex;
@@ -28,7 +27,6 @@
         font-family: $montserrat-regular;
         font-size: 16px;
         color: $base-color;
-        margin-bottom: 40px;
 
         .blog__filter-closed {
           width: 148px;

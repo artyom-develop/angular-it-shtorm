@@ -1,6 +1,13 @@
 import { ViewportScroller } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth';
@@ -16,6 +23,7 @@ import { UserService } from '../../services/user';
   imports: [RouterModule, ClickHide],
   templateUrl: './header.html',
   styleUrl: './header.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
   private router = inject(Router);
@@ -31,10 +39,14 @@ export class Header {
   });
 
   isShowMenu = signal<boolean>(false);
+  private scrollTimeout: number | null = null;
 
   navigateWithFragment(route: string, fragment: string) {
     this.router.navigate([route], { fragment }).then(() => {
-      setTimeout(() => {
+      if (this.scrollTimeout) {
+        clearTimeout(this.scrollTimeout);
+      }
+      this.scrollTimeout = setTimeout(() => {
         this.viewportScroller.scrollToAnchor(fragment);
       }, 100);
     });
@@ -55,6 +67,12 @@ export class Header {
       if (this.isLoggedIn() && this.authService.getTokens().accessToken) {
         this.loadUser();
         this.isShowMenu.set(false);
+      }
+    });
+
+    this.destroyRef.onDestroy(() => {
+      if (this.scrollTimeout) {
+        clearTimeout(this.scrollTimeout);
       }
     });
   }
@@ -81,7 +99,7 @@ export class Header {
             this.clearDataUser();
             return;
           }
-          
+
           this.clearDataUser();
         },
       });

@@ -1,13 +1,310 @@
+// === Fade Animations ===
+.fade-in {
+  animation: fadeIn 300ms ease-in;
+}
 
+.fade-out {
+  animation: fadeOut 300ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// === Slide Animations ===
+.slide-in-left {
+  animation: slideInLeft 400ms ease-out;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 400ms ease-in;
+}
+
+.slide-in-right {
+  animation: slideInRight 400ms ease-out;
+}
+
+.slide-out-right {
+  animation: slideOutRight 400ms ease-in;
+}
+
+.slide-in-up {
+  animation: slideInUp 400ms ease-out;
+}
+
+.slide-out-up {
+  animation: slideOutUp 400ms ease-in;
+}
+
+.slide-in-down {
+  animation: slideInDown 400ms ease-out;
+}
+
+.slide-out-down {
+  animation: slideOutDown 400ms ease-in;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+// === Scale Animations ===
+.scale-in {
+  animation: scaleIn 300ms ease-out;
+}
+
+.scale-out {
+  animation: scaleOut 300ms ease-in;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+// === Zoom Animations ===
+.zoom-in {
+  animation: zoomIn 300ms ease-out;
+}
+
+.zoom-out {
+  animation: zoomOut 300ms ease-in;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+// === Bounce Animations ===
+.bounce-in {
+  animation: bounceIn 600ms ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// === Flip Animations ===
+.flip-in {
+  animation: flipIn 600ms ease-out;
+}
+
+.flip-out {
+  animation: flipOut 600ms ease-in;
+}
+
+@keyframes flipIn {
+  from {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+}
+
+@keyframes flipOut {
+  from {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+}
+
+// === Rotate Animations ===
+.rotate-in {
+  animation: rotateIn 500ms ease-out;
+}
+
+.rotate-out {
+  animation: rotateOut 500ms ease-in;
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes rotateOut {
+  from {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.5);
+  }
+}
+
+// === Legacy Animations (Keep for backwards compatibility) ===
 .deleting {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 500ms ease-out, transform 200ms ease-out;
+  transition:
+    opacity 500ms ease-out,
+    transform 200ms ease-out;
 }
 
 .enter-animation {
   animation: slide-fade 500ms;
 }
+
 @keyframes slide-fade {
   from {
     opacity: 0;

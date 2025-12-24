@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { DestroyRef, Injectable, signal, inject } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { SliderInterface } from '../../types/main/slider.interface.interface';
 import { OffersEnum } from '../../types/offereEnum.enum';
@@ -7,10 +7,19 @@ import { OffersEnum } from '../../types/offereEnum.enum';
   providedIn: 'root',
 })
 export class SliderService {
+  private destroyRef = inject(DestroyRef);
   currentSlideIndex = signal(0);
   autoplayIntervalSignal = signal(10000);
 
   private autoplayTimeout: number | null = null;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.autoplayTimeout) {
+        clearTimeout(this.autoplayTimeout);
+      }
+    });
+  }
 
   slides = signal<SliderInterface[]>([
     {

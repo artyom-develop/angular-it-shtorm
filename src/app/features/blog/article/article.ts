@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -33,6 +33,7 @@ import { tap, throwError } from 'rxjs';
   ],
   templateUrl: './article.html',
   styleUrl: './article.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Article {
   activatedRoute = inject(ActivatedRoute);
@@ -67,14 +68,17 @@ export class Article {
   newComment: string = '';
   ActionCommentEnum = ActionCommentEnum;
   currentCommentOffset = signal<number>(3);
+
   constructor() {
-    this.activatedRoute.params.subscribe(params => {
-      if (params['url']) {
-        this.urlArticle.set(params['url']);
-        this.loadArticle(params['url']);
-        this.loadRelatedArticle(params['url']);
-      }
-    });
+    this.activatedRoute.params
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(params => {
+        if (params['url']) {
+          this.urlArticle.set(params['url']);
+          this.loadArticle(params['url']);
+          this.loadRelatedArticle(params['url']);
+        }
+      });
   }
 
   private loadArticle(url: string) {
@@ -144,11 +148,8 @@ export class Article {
           'Ваш комментарий успешно отправлен и будет опубликован после модерации.'
         );
         this.newComment = '';
-
-        // Перезагружаем комментарии и действия через небольшую задержку
-        setTimeout(() => {
-          this.loadComments(0);
-        }, 500);
+        this.loadComments(0);
+        this.loadUserActions();
       });
   }
 

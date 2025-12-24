@@ -28,7 +28,6 @@
       color: #a8aba7;
       padding: 17.5px;
     }
-    // Сбросить фон автозаполнения
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 1000px $white inset !important;
       box-shadow: 0 0 0 1000px $white inset !important;
@@ -59,7 +58,6 @@
       line-height: 130%;
       color: #a8aba7;
     }
-    // Сбросить фон автозаполнения
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 1000px $white inset !important;
       box-shadow: 0 0 0 1000px $white inset !important;
@@ -107,7 +105,6 @@
   }
 }
 
-// Универсальный адаптивный миксин
 @mixin responsive($max: null) {
   @if $max != null {
     @media (max-width: #{$max}) {

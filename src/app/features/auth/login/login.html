@@ -93,8 +93,6 @@
             @for (err of passwordErrors; track $index) {
               <span
                 class="form__error-item"
-                animate.leave="deleting"
-                animate.enter="fade-in"
                 >{{ err }}</span
               >
             }

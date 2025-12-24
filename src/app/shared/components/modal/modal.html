@@ -1,4 +1,4 @@
-<div class="modal" clickHide (clickHideChange)="clickHide($event)">
+<div class="modal" clickHide (clickHideChange)="clickHide($event)" animate.enter="slideInDown" animate.leave="slideOutDown">
   <div class="modal__close" (click)="close()">
     <svg
       width="16"
@@ -27,9 +27,9 @@
   </div>
   @if (!isThanks() && !loading()) {
     @if (isTypeOrder()) {
-      <div class="modal__title">Заявка на услугу!</div>
+      <div class="modal__title" animate.enter="fade-in">Заявка на услугу!</div>
     } @else {
-      <div class="modal__title">Закажите бесплатную консультацию!</div>
+      <div class="modal__title" animate.enter="fade-in">Закажите бесплатную консультацию!</div>
     }
 
     <form

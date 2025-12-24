@@ -15,7 +15,9 @@ export class Pagination {
   router = inject(Router);
 
   openPage(page: number) {
-   
+    if (this.activeParams().page === page) {
+      return;
+    }
     const newParams = {
       ...this.activeParams(),
       page: page,
@@ -26,7 +28,6 @@ export class Pagination {
   }
 
   openNextPage() {
-    
     if (
       this.activeParams().page &&
       this.activeParams().page < this.pages().length
@@ -42,7 +43,6 @@ export class Pagination {
   }
 
   openPrevPage() {
- 
     if (this.activeParams().page && this.activeParams().page > 1) {
       const newParams = {
         ...this.activeParams(),

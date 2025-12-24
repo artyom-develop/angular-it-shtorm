@@ -1,6 +1,10 @@
-<app-slider></app-slider>
-<app-offers id="offers" [fullOffers]="fullOffers"></app-offers>
-<app-advantages id="advantages"></app-advantages>
-<app-populars></app-populars>
-<app-comments id="comments"></app-comments>
-<app-map id="contacts"></app-map>
+<app-slider animate.enter="fade-in"></app-slider>
+<app-offers
+  id="offers"
+  [fullOffers]="fullOffers"
+  animate.enter="fade-in"
+></app-offers>
+<app-advantages id="advantages" animate.enter="fade-in"></app-advantages>
+<app-populars animate.enter="fade-in"></app-populars>
+<app-comments id="comments" animate.enter="fade-in"></app-comments>
+<app-map id="contacts" animate.enter="fade-in"></app-map>

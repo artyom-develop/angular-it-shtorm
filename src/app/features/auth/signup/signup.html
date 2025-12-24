@@ -19,9 +19,10 @@
           />
         </label>
         @if (firstNameErrors.length > 0 && invalidFirstName) {
-          <div class="form__error-block">
+          <div class="form__error-block"     animate.leave="deleting"
+                animate.enter="fade-in">
             @for (err of firstNameErrors; track $index) {
-              <span class="form__error-item">{{ err }}</span>
+              <span class="form__error-item" >{{ err }}</span>
             }
           </div>
         }
@@ -41,7 +42,8 @@
           />
         </label>
         @if (emailErrors.length > 0 && invalidEmail) {
-          <div class="form__error-block">
+          <div class="form__error-block"     animate.leave="deleting"
+                animate.enter="fade-in">
             @for (err of emailErrors; track $index) {
               <span class="form__error-item">{{ err }}</span>
             }
@@ -61,7 +63,8 @@
             placeholder="Пароль"
             [style.borderColor]="invalidPassword ? 'red' : ''"
           />
-           <div class="hide-password" (click)="togglePasswordVisibility()">
+           <div class="hide-password" (click)="togglePasswordVisibility()"     animate.leave="deleting"
+                animate.enter="fade-in">
             @if (isHidePassword()) {
               <svg
                 width="24"
@@ -144,7 +147,8 @@
           </div>
         </label>
         @if (repeatPasswordErrors.length > 0 && invalidPasswordRepeat) {
-          <div class="form__error-block">
+          <div class="form__error-block"     animate.leave="deleting"
+                animate.enter="fade-in">
             @for (err of repeatPasswordErrors; track $index) {
               @if (err) {
                 <span class="form__error-item">{{ err }}</span>

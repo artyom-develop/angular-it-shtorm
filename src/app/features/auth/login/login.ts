@@ -1,6 +1,12 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
@@ -22,6 +28,7 @@ import { DefaultResponse } from './../../../types/defaultResponse.interface';
   templateUrl: './login.html',
   styleUrl: './login.scss',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
   zodErrors: ValidationErrors = {};
@@ -30,14 +37,16 @@ export class Login {
   toastService = inject(ToastService);
   router = inject(Router);
   userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
+  location = inject(Location);
+  redirectTimeout: number | null = null;
+  isHidePassword = signal<boolean>(true);
+
   loginForm = this.fb.nonNullable.group({
     email: [''],
     password: [''],
     rememberMe: false,
   });
-  location = inject(Location);
-  destroy$ = new Subject<void>();
-  isHidePassword = signal<boolean>(true);
 
   togglePasswordVisibility() {
     this.isHidePassword.set(!this.isHidePassword());
@@ -48,6 +57,8 @@ export class Login {
     this.loginForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       this.runZodValidation(this.loginForm.getRawValue() as LoginModel);
     });
+
+
   }
 
   private runZodValidation(value: LoginModel) {
@@ -71,7 +82,7 @@ export class Login {
 
         this.authService
           .login(email, password, !!rememberMe)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe({
             next: (data: LoginResponse | DefaultResponse) => {
               let error = null;
@@ -107,8 +118,10 @@ export class Login {
                 'Вы успешно вошли в систему.'
               );
 
-              // Небольшая задержка перед редиректом для стабилизации состояния
-              setTimeout(() => {
+              if (this.redirectTimeout) {
+                clearTimeout(this.redirectTimeout);
+              }
+              this.redirectTimeout = setTimeout(() => {
                 this.location.back();
               }, 100);
             },
@@ -134,10 +147,5 @@ export class Login {
 
   isFormValid(): boolean {
     return Object.keys(this.zodErrors).length === 0;
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

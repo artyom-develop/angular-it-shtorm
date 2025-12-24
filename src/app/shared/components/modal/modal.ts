@@ -1,4 +1,4 @@
-import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
@@ -27,6 +27,7 @@ import { status } from '../../../types/statusType';
   ],
   templateUrl: './modal.html',
   styleUrl: './modal.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Modal {
   isThanks = signal(false);

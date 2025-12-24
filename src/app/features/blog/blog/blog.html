@@ -15,7 +15,7 @@
         (categoriesOutput)="onCategoriesResult($event)"
       ></category-filter>
     </div>
-    <div class="blog__articles">
+    <div class="blog__articles"  >
       @if (isLoading()) {
         <app-loading></app-loading>
       } @else if (articles() && articles()!.length > 0) {

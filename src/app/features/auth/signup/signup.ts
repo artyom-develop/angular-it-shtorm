@@ -1,4 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -9,6 +15,7 @@ import { SignupSchema } from './../auth.schema';
 
 import { Router, RouterModule } from '@angular/router';
 
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, takeUntil } from 'rxjs';
@@ -19,13 +26,13 @@ import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { status } from '../../../types/statusType';
 import { UserResponse } from '../../../types/user/userResponse.interface';
 import { SignupModel, ValidateForm } from '../auth.schema';
-import { Location } from '@angular/common';
 @Component({
   selector: 'app-signup',
   imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signup {
   zodErrors: ValidationErrors = {};
@@ -34,6 +41,12 @@ export class Signup {
   toastService = inject(ToastService);
   userService = inject(UserService);
   router = inject(Router);
+  destroyRef = inject(DestroyRef);
+  location = inject(Location);
+  redirectTimeout: number | null = null;
+  isHidePassword = signal<boolean>(true);
+  isHideRepeatPassword = signal<boolean>(true);
+
   signUpForm = this.fb.nonNullable.group({
     firstName: [''],
     email: [''],
@@ -41,10 +54,6 @@ export class Signup {
     repeatPassword: [''],
     agree: false,
   });
-  location = inject(Location);
-  destroy$ = new Subject<void>();
-  isHidePassword =  signal<boolean>(true);
-  isHideRepeatPassword = signal<boolean>(true);
 
   toggleRepeatPasswordVisibility() {
     this.isHideRepeatPassword.set(!this.isHideRepeatPassword());
@@ -57,6 +66,7 @@ export class Signup {
     this.signUpForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       this.runZodValidation(this.signUpForm.getRawValue() as SignupModel);
     });
+
   }
 
   private runZodValidation(value: SignupModel) {
@@ -79,7 +89,7 @@ export class Signup {
         const name = res.data.firstName;
         this.authService
           .signup(email, password, name)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe({
             next: (data: SignupResponse | DefaultResponse) => {
               let error = null;
@@ -115,8 +125,10 @@ export class Signup {
                 'Вы успешно зарегистрировались в системе.'
               );
 
-              // Небольшая задержка перед редиректом для стабилизации состояния
-              setTimeout(() => {
+              if (this.redirectTimeout) {
+                clearTimeout(this.redirectTimeout);
+              }
+              this.redirectTimeout = setTimeout(() => {
                 this.location.back();
               }, 100);
             },
@@ -143,10 +155,7 @@ export class Signup {
     }
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+ 
 
   isFormValid(): boolean {
     return Object.keys(this.zodErrors).length === 0;
@@ -155,7 +164,7 @@ export class Signup {
   checkUser() {
     this.userService
       .getUserInfo()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (userData: UserResponse | DefaultResponse) => {
           let error = null;
