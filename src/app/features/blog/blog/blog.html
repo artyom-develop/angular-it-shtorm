@@ -1,7 +1,10 @@
 <div class="blog">
   <div class="container">
     <div class="blog__title">Блог</div>
-    <div class="blog__filters">
+    <div
+      class="blog__filters"
+      [style.marginBottom]="labels().length > 4 ? '40px' : '0'"
+    >
       <div class="filter__labels">
         @for (label of labels(); track $index) {
           <app-filter-label
@@ -15,7 +18,7 @@
         (categoriesOutput)="onCategoriesResult($event)"
       ></category-filter>
     </div>
-    <div class="blog__articles"  >
+    <div class="blog__articles">
       @if (isLoading()) {
         <app-loading></app-loading>
       } @else if (articles() && articles()!.length > 0) {

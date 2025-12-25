@@ -1,6 +1,8 @@
 @use 'variables' as *;
 
 .footer {
+  flex-shrink: 0; // Не сжимается
+
   background-color: $footer_bg-color;
   .container {
     padding: 40px 0 54px 0;
@@ -27,11 +29,11 @@
           align-items: center;
           gap: 20px;
           font-size: 16px;
-          li{
-            &::before{
+          li {
+            &::before {
               content: '';
             }
-            &::after{
+            &::after {
               content: '';
             }
           }

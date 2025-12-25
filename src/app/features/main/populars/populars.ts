@@ -16,7 +16,6 @@ export class Populars {
   articlesService = inject(ArticlesService);
   articles = signal<ArticleInterface[]>([]);
   private destroyRef = inject(DestroyRef);
-  environment: any;
 
   constructor() {
     this.articlesService

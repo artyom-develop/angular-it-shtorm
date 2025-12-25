@@ -1,6 +1,7 @@
 @use 'variables' as *;
 @use 'ui/checkbox' as *;
 @use 'mixins' as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -9,13 +10,19 @@
 
 html,
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: white;
   font-size: 16px;
   font-family: $montserrat-regular;
   color: $base-color;
+  scroll-behavior: smooth;
+}
 
-  scroll-behavior: smooth; // Плавная прокрутка
-} /* Сбрасываем почти все стили user agent */
+// Убираем все лишние стили для app-root и body
+// Они теперь в layout.scss
+
 *:where(
   :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
 ) {
@@ -88,9 +95,11 @@ table {
   color: $white;
   transition: all 0.3s ease;
   text-align: center;
+  
   &:hover {
     background-color: $second-color-active;
   }
+  
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -124,6 +133,7 @@ table {
   opacity: 1;
   transform: translateY(0);
 }
+
 .p-carousel-prev-button {
   position: absolute;
   top: 250px !important;
@@ -141,13 +151,15 @@ table {
 }
 
 p-carousel-item.p-carousel-item-active.p-carousel-item-end {
-  min-width: 396px;
-  width: 396px;
+  min-width: 390px;
+  width: 390px;
 }
+
 .p-carousel-item.p-carousel-item-active {
   min-width: 396px;
   width: 396px;
 }
+
 .p-carousel-item {
   min-width: 396px;
   width: 396px;
@@ -164,6 +176,7 @@ h3 {
   line-height: 130%;
   color: #709fdc;
 }
+
 p {
   font-family: $montserrat-regular;
   font-size: 14px;
@@ -171,18 +184,21 @@ p {
   color: #071739;
   margin-bottom: 20px;
 }
+
 br {
   margin-bottom: 40px;
 }
 
 ul {
   padding-left: 10px;
+  
   li {
     margin-bottom: 10px;
     font-family: $montserrat-regular;
     font-size: 14px;
     line-height: 130%;
     color: #071739;
+    
     &::before {
       content: '• ';
       color: $base-color;
@@ -195,6 +211,17 @@ ul {
   position: absolute;
   top: calc(50% - 11px);
   right: 15px;
-
   cursor: pointer;
+}
+
+.comments{
+.p-carousel-item.p-carousel-item-active{
+  max-width: 390px !important;
+  width: 390px !important;
+  margin-right:25px;
+}
+
+.p-carousel-item.p-carousel-item-active.p-carousel-item-end{
+   margin-right:10px !important;
+}
 }

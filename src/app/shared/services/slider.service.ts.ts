@@ -61,6 +61,10 @@ export class SliderService {
 
     if (carousel) {
       carousel.navForward(event);
+      // Синхронизируем индекс после навигации
+      setTimeout(() => {
+        this.currentSlideIndex.set(carousel.page);
+      }, 50);
     }
 
     if (this.autoplayTimeout) {
@@ -77,6 +81,10 @@ export class SliderService {
 
     if (carousel) {
       carousel.navBackward(event);
+      // Синхронизируем индекс после навигации
+      setTimeout(() => {
+        this.currentSlideIndex.set(carousel.page);
+      }, 50);
     }
 
     if (this.autoplayTimeout) {
@@ -88,30 +96,31 @@ export class SliderService {
     }, 5000);
   }
   goToSlide(index: number, carousel: Carousel, event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Останавливаем автопрокрутку
     this.autoplayIntervalSignal.set(0);
 
-    if (carousel) {
-      const currentPage = carousel.page;
+    if (carousel && carousel.page !== index) {
+      // Прямое присвоение страницы - надежнее, чем множественные navForward/navBackward
+      carousel.page = index;
+      
+      // Обновляем currentSlideIndex сразу для синхронизации UI
+      this.currentSlideIndex.set(index);
 
-      if (index > currentPage) {
-        const steps = index - currentPage;
-        for (let i = 0; i < steps; i++) {
-          carousel.navForward(event);
-        }
-      } else if (index < currentPage) {
-        const steps = currentPage - index;
-        for (let i = 0; i < steps; i++) {
-          carousel.navBackward(event);
-        }
-      }
-
-      if (this.autoplayTimeout) {
-        clearTimeout(this.autoplayTimeout);
-      }
-
-      this.autoplayTimeout = setTimeout(() => {
-        this.autoplayIntervalSignal.set(10000);
-      }, 5000);
+      // Принудительно вызываем обновление carousel
+      carousel.onPage.emit({ page: index });
     }
+
+    // Очищаем предыдущий таймаут
+    if (this.autoplayTimeout) {
+      clearTimeout(this.autoplayTimeout);
+    }
+
+    // Возобновляем автопрокрутку через 5 секунд
+    this.autoplayTimeout = setTimeout(() => {
+      this.autoplayIntervalSignal.set(10000);
+    }, 5000);
   }
 }

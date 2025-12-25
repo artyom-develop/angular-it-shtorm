@@ -59,7 +59,7 @@ export class Slider implements AfterViewInit {
   }
 
   consultationTo(value: OffersEnum) {
-    this.modalService.setOffer({ offer: value, type: ModalType.consultation });
+    this.modalService.setOffer({ offer: value, type: ModalType.order });
     this.modalService.open();
   }
 

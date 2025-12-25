@@ -1,5 +1,13 @@
-@use 'variables' as *;
-@use 'mixins' as *;
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+main {
+  flex: 1;
+}
 
 .scroll-to-top {
   position: fixed;
@@ -19,7 +27,7 @@
   z-index: 1000;
 
   &:hover {
-    background-color: darken(#709fdc, 10%);
+    background-color: rgba(112, 159, 220, .1);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(112, 157, 220, 0.4);
   }

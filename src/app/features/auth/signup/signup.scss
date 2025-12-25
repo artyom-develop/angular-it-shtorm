@@ -2,11 +2,13 @@
 @use 'mixins' as *;
 
 .signup {
+
   .container {
     padding: 106px 0 92px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap:185px;
     .signup__content {
       max-width: 429px;
       .signup__title {

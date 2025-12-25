@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { Toast } from 'primeng/toast';
 import { Modal } from './shared/components/modal/modal';
 import { ModalService } from './shared/services/modal-service';
-import { useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',

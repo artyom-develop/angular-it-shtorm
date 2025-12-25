@@ -1,6 +1,7 @@
 @use 'variables' as *;
 
 .header {
+  flex-shrink: 0; // Не сжимается
 
   background-color: $white;
   .container {
