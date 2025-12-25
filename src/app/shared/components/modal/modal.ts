@@ -1,4 +1,11 @@
-import { Component, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
@@ -9,12 +16,12 @@ import {
 import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { ModalType } from '../../../types/modal/modalRequest.interface';
 import { OffersEnum } from '../../../types/offereEnum.enum';
+import { status } from '../../../types/statusType';
 import { ClickHide } from '../../directives/click-hide';
 import { PhoneInputDeirective } from '../../directives/phone-input-deirective';
 import { ModalService } from '../../services/modal-service';
-import { Loading } from '../loading/loading';
 import { ToastService } from '../../services/toast';
-import { status } from '../../../types/statusType';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-modal',

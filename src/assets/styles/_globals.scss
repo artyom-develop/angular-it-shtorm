@@ -216,12 +216,14 @@ ul {
 
 .comments{
 .p-carousel-item.p-carousel-item-active{
-  max-width: 390px !important;
-  width: 390px !important;
+  max-width: 388px !important;
+  width: 388px !important;
   margin-right:25px;
 }
-
+.p-carousel-item.p-carousel-item-active.p-carousel-item-start{
+    margin-left:5px !important;
+}
 .p-carousel-item.p-carousel-item-active.p-carousel-item-end{
-   margin-right:10px !important;
+   margin-right:0 !important;
 }
 }

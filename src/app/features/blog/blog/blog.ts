@@ -34,7 +34,7 @@ export class Blog {
   labels = signal<string[]>([]);
   categories = signal<CategoryInterface[]>([]);
   destroyRef = inject(DestroyRef);
-  
+
   toggleFilter() {
     this.isShowFilter = !this.isShowFilter;
   }

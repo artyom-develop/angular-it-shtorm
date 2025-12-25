@@ -1,8 +1,16 @@
 import { DatePipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { tap } from 'rxjs';
 import { AuthService } from '../../../core/auth/auth';
 import { ArticleCard } from '../../../shared/components/article-card/article-card';
 import { Loading } from '../../../shared/components/loading/loading';
@@ -10,6 +18,7 @@ import { FormatTextHtmlPipe } from '../../../shared/pipes/format-text-html-pipe'
 import { ArticlesService } from '../../../shared/services/articles-service';
 import { CommentService } from '../../../shared/services/comment-service';
 import { ToastService } from '../../../shared/services/toast';
+import { ActionCommentEnum } from '../../../types/action-comment.enum';
 import { ActionTypeInterface } from '../../../types/actionType.interface';
 import { ArticleFullInterface } from '../../../types/article/articleFullResponse.interface';
 import { ArticleInterface } from '../../../types/article/articleTop.interface';
@@ -17,9 +26,6 @@ import { DefaultResponse } from '../../../types/defaultResponse.interface';
 import { CommentResponseInterface } from '../../../types/main/commentResponse.interface';
 import { status } from '../../../types/statusType';
 import { environment } from './../../../../environments/environment';
-import { ActionCommentEnum } from '../../../types/action-comment.enum';
-import { HttpErrorResponse } from '@angular/common/http';
-import { tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-article',

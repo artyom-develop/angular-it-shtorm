@@ -1,4 +1,4 @@
-<section class="comments" id='comments'>
+<section class="comments" id="comments">
   <div class="container comments__container">
     <div class="comments__tile">Отзывы о нашей работе</div>
     <p-carousel
@@ -6,7 +6,6 @@
       [value]="comments()"
       [numVisible]="3"
       [numScroll]="1"
-    
       [circular]="true"
       [autoplayInterval]="autoplayIntervalSignal()"
       [showIndicators]="false"
@@ -14,7 +13,7 @@
       class="comments__slider"
     >
       <ng-template pTemplate="item" let-comment>
-        <div class="comments-slide" >
+        <div class="comments-slide">
           <div class="comment__head">
             <div class="comment__avatar">
               <img [src]="comment.image" [alt]="comment.name" />
@@ -23,7 +22,6 @@
           </div>
           <div class="comment__text">
             {{ comment.description | formatTextSlice: 190 }}
-            
           </div>
         </div>
       </ng-template>

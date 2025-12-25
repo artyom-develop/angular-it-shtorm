@@ -1,4 +1,4 @@
-import { DestroyRef, Injectable, signal, inject } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { SliderInterface } from '../../types/main/slider.interface.interface';
 import { OffersEnum } from '../../types/offereEnum.enum';
@@ -105,7 +105,7 @@ export class SliderService {
     if (carousel && carousel.page !== index) {
       // Прямое присвоение страницы - надежнее, чем множественные navForward/navBackward
       carousel.page = index;
-      
+
       // Обновляем currentSlideIndex сразу для синхронизации UI
       this.currentSlideIndex.set(index);
 

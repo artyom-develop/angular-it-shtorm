@@ -4,8 +4,11 @@
       Блог / <span>{{ article().title }}</span>
     </div>
     <div class="article__top">
-      <div class="article__top-left" 
-      animate.enter="slide-in-left" animate.leave="slide-out-left">
+      <div
+        class="article__top-left"
+        animate.enter="slide-in-left"
+        animate.leave="slide-out-left"
+      >
         <div class="article__title">
           {{ article().title }}
         </div>
@@ -13,8 +16,11 @@
           {{ article().description }}
         </div>
       </div>
-      <div class="article__top-right" 
-      animate.enter="slide-in-right" animate.leave="slide-out-right">
+      <div
+        class="article__top-right"
+        animate.enter="slide-in-right"
+        animate.leave="slide-out-right"
+      >
         <img
           [src]="environment.staticPath + article().image"
           alt="{{ article().title }}"
@@ -22,7 +28,11 @@
       </div>
     </div>
     <div class="article__bottom">
-      <div class="article__content" animate.enter="slide-in-left" animate.leave="slide-out-left">
+      <div
+        class="article__content"
+        animate.enter="slide-in-left"
+        animate.leave="slide-out-left"
+      >
         <div class="article__content-text">
           <div
             class="article__content-text-info"
@@ -142,7 +152,11 @@
           @if (comments().allCount > 0) {
             <div class="article__comments-list">
               @for (comment of comments().comments; track $index) {
-                <div class="article__comments-item" animate.enter="fade-in" animate.leave="fade-out">
+                <div
+                  class="article__comments-item"
+                  animate.enter="fade-in"
+                  animate.leave="fade-out"
+                >
                   <div class="article__comments-author">
                     <img src="assets\images\article\avatar.png" alt="" />
                     <div class="article__comments-author-info">
@@ -307,7 +321,11 @@
           }
         </div>
       </div>
-      <div class="article__content-related" animate.enter="slide-in-right" animate.leave="slide-out-right">
+      <div
+        class="article__content-related"
+        animate.enter="slide-in-right"
+        animate.leave="slide-out-right"
+      >
         <div class="article__content-title">Читайте также:</div>
 
         <div class="article__content-items">
