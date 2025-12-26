@@ -11,6 +11,8 @@
             [categories]="categories()"
             [label]="label"
             [activeParams]="activateParams"
+            animate.enter="fade-in"
+            animate.leave="fade-out"
           ></app-filter-label>
         }
       </div>
@@ -23,7 +25,11 @@
         <app-loading></app-loading>
       } @else if (articles() && articles()!.length > 0) {
         @for (article of articles()!; track $index) {
-          <article-card [article]="article"></article-card>
+          <article-card
+            [article]="article"
+            animate.enter="fade-in"
+            animate.leave="fade-out"
+          ></article-card>
         }
       } @else {
         <span>Ничего не найдено</span>

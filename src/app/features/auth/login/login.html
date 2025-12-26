@@ -7,10 +7,14 @@
     >
       <h1 class="login__title">Войти в личный кабинет</h1>
       <form class="form" (submit)="onLogin($event)">
-        <label for="email" class="form__item">
-          @let email = loginForm.email();
-          @let isEmailError =
-            email.invalid() && (email.touched() || email.dirty());
+        @let email = loginForm.email();
+        @let isEmailError =
+          email.invalid() && (email.touched() || email.dirty());
+        <label
+          for="email"
+          class="form__item"
+         
+        >
           <input
             type="email"
             [field]="loginForm.email"
@@ -24,23 +28,27 @@
         @if (email.invalid() && email.dirty()) {
           <div
             class="form__error-block"
-            animate.leave="deleting"
-            animate.enter="fade-in"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
           >
             @for (err of email.errors(); track $index) {
               <span
                 class="form__error-item"
-                animate.leave="deleting"
-                animate.enter="fade-in"
+                animate.leave="error-fade-out"
+                animate.enter="error-fade-in"
                 >{{ err.message }}</span
               >
             }
           </div>
         }
-        <label for="password" class="form__item form__item--password">
-          @let password = loginForm.password();
-          @let isPasswordError =
-            password.invalid() && (password.touched() || password.dirty());
+        @let password = loginForm.password();
+        @let isPasswordError =
+          password.invalid() && (password.touched() || password.dirty());
+        <label
+          for="password"
+          class="form__item form__item--password"
+          
+        >
           <input
             [type]="isHidePassword() ? 'password' : 'text'"
             [field]="loginForm.password!"
@@ -84,11 +92,19 @@
         @if (password.errors() && password.dirty()) {
           <div
             class="form__error-block"
-            animate.leave="deleting"
-            animate.enter="fade-in"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
+            [style]="{
+              'height': password.errors().length > 1 ? '60px' :  password.errors().length === 1 ? '40px' : '0',
+            }"
           >
             @for (err of password.errors(); track $index) {
-              <span class="form__error-item">{{ err.message }}</span>
+              <span
+                class="form__error-item"
+                animate.leave="error-fade-out"
+                animate.enter="error-fade-in"
+                >{{ err.message }}</span
+              >
             }
           </div>
         }

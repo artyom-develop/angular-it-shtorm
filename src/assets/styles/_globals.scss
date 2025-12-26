@@ -95,11 +95,11 @@ table {
   color: $white;
   transition: all 0.3s ease;
   text-align: center;
-  
+
   &:hover {
     background-color: $second-color-active;
   }
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -107,11 +107,13 @@ table {
 }
 
 .form__error-block {
-  margin-top: 5px;
-  margin-bottom: 10px;
+  max-width: 422px;
+  height: 30px;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  transition: all 0.3s ease;
 }
 
 .form__error-item {
@@ -123,6 +125,7 @@ table {
   font-family: $montserrat-regular;
   line-height: 130%;
   opacity: 0;
+  max-width: 422px;
   transform: translateY(-8px);
   transition:
     opacity 0.25s,
@@ -191,14 +194,14 @@ br {
 
 ul {
   padding-left: 10px;
-  
+
   li {
     margin-bottom: 10px;
     font-family: $montserrat-regular;
     font-size: 14px;
     line-height: 130%;
     color: #071739;
-    
+
     &::before {
       content: '• ';
       color: $base-color;
@@ -214,16 +217,16 @@ ul {
   cursor: pointer;
 }
 
-.comments{
-.p-carousel-item.p-carousel-item-active{
-  max-width: 388px !important;
-  width: 388px !important;
-  margin-right:25px;
-}
-.p-carousel-item.p-carousel-item-active.p-carousel-item-start{
-    margin-left:5px !important;
-}
-.p-carousel-item.p-carousel-item-active.p-carousel-item-end{
-   margin-right:0 !important;
-}
+.comments {
+  .p-carousel-item.p-carousel-item-active {
+    max-width: 388px !important;
+    width: 388px !important;
+    margin-right: 25px;
+  }
+  .p-carousel-item.p-carousel-item-active.p-carousel-item-start {
+    margin-left: 5px !important;
+  }
+  .p-carousel-item.p-carousel-item-active.p-carousel-item-end {
+    margin-right: 0 !important;
+  }
 }

@@ -294,11 +294,7 @@
 
 // === Legacy Animations (Keep for backwards compatibility) ===
 .deleting {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 500ms ease-out,
-    transform 200ms ease-out;
+  animation: errorFadeOut 250ms ease-out forwards;
 }
 
 .enter-animation {
@@ -313,5 +309,40 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// === Error Animations ===
+.error-fade-in {
+  animation: errorFadeIn 250ms ease-in forwards;
+}
+
+.error-fade-out {
+  animation: errorFadeOut 250ms ease-out forwards;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100px;
+  }
+}
+
+@keyframes errorFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100px;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
   }
 }

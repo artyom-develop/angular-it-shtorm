@@ -6,7 +6,7 @@ export type LoginModel = z.infer<typeof LoginSchema>;
 
 const FullSchema = z.object({
   firstName: z.string().regex(/^[A-ZА-ЯЁ][a-zа-яё]+$/, {
-    message: 'Имя должно начинаться с большой буквы и содержать только буквы',
+    message: 'Имя должно быть с большой буквы и содержать только буквы',
   }),
   email: z.string().email({ message: 'Некорректный email адрес' }),
   password: z
@@ -27,13 +27,6 @@ const FullSchema = z.object({
   rememberMe: z.boolean().optional(),
   repeatPassword: z
     .string()
-    .min(8, { message: '' })
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      {
-        message: '',
-      }
-    ),
 });
 
 export const LoginSchema = FullSchema.pick({

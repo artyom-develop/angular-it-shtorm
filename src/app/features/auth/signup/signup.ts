@@ -125,7 +125,7 @@ export class Signup {
               clearTimeout(this.redirectTimeout);
             }
             this.redirectTimeout = setTimeout(() => {
-              this.location.back();
+              this.router.navigate(['/']);
             }, 100);
           },
           error: (err: HttpErrorResponse) => {

@@ -7,10 +7,14 @@
     >
       <div class="signup__title">Регистрация на сайте</div>
       <form class="form" (submit)="onSignup($event)">
-        <label for="name" class="form__item">
-          @let firstName = signupForm.firstName();
-          @let isFirstNameError =
-            firstName.invalid() && (firstName.touched() || firstName.dirty());
+        @let firstName = signupForm.firstName();
+        @let isFirstNameError =
+          firstName.invalid() && (firstName.touched() || firstName.dirty());
+        <label
+          for="name"
+          class="form__item"
+          
+        >
           <input
             type="text"
             [field]="signupForm.firstName"
@@ -21,21 +25,31 @@
             [style.borderColor]="isFirstNameError ? 'red' : ''"
           />
         </label>
-        @if (firstName.errors() && firstName.dirty()) {
+        @if (firstName.invalid() && firstName.dirty()) {
           <div
             class="form__error-block"
-            animate.leave="deleting"
-            animate.enter="fade-in"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
+            animate.enter="error-fade-in"
           >
             @for (err of firstName.errors(); track $index) {
-              <span class="form__error-item">{{ err.message }}</span>
+              <span
+                class="form__error-item"
+                animate.leave="error-fade-out"
+                animate.enter="error-fade-in"
+                >{{ err.message }}</span
+              >
             }
           </div>
         }
-        <label for="email" class="form__item">
-          @let email = signupForm.email();
-          @let isEmailError =
-            email.invalid() && (email.touched() || email.dirty());
+        @let email = signupForm.email();
+        @let isEmailError =
+          email.invalid() && (email.touched() || email.dirty());
+        <label
+          for="email"
+          class="form__item"
+          
+        >
           <input
             type="email"
             [field]="signupForm.email"
@@ -46,21 +60,30 @@
             [style.borderColor]="isEmailError ? 'red' : ''"
           />
         </label>
-        @if (email.errors() && email.dirty()) {
+        @if (email.invalid() && email.dirty()) {
           <div
             class="form__error-block"
-            animate.leave="deleting"
-            animate.enter="fade-in"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
           >
             @for (err of email.errors(); track $index) {
-              <span class="form__error-item">{{ err.message }}</span>
+              <span
+                class="form__error-item"
+                animate.leave="error-fade-out"
+                animate.enter="error-fade-in"
+                >{{ err.message }}</span
+              >
             }
           </div>
         }
-        <label for="password" class="form__item">
-          @let password = signupForm.password();
-          @let isPasswordError =
-            password.invalid() && (password.touched() || password.dirty());
+        @let password = signupForm.password();
+        @let isPasswordError =
+          password.invalid() && (password.touched() || password.dirty());
+        <label
+          for="password"
+          class="form__item"
+         
+        >
           <input
             [type]="isHidePassword() ? 'password' : 'text'"
             [field]="signupForm.password"
@@ -106,18 +129,39 @@
           </div>
         </label>
 
-        @if (password.errors() && password.dirty()) {
-          <div class="form__error-block">
+        @if (password.invalid() && password.dirty()) {
+          <div
+            class="form__error-block"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
+            [style]="{
+              height:
+                password.errors().length > 1
+                  ? '60px'
+                  : password.errors().length === 1
+                    ? '40px'
+                    : '0',
+            }"
+          >
             @for (err of password.errors(); track $index) {
-              <span class="form__error-item">{{ err.message }}</span>
+              <span
+                class="form__error-item"
+                animate.leave="error-fade-out"
+                animate.enter="error-fade-in"
+                >{{ err.message }}</span
+              >
             }
           </div>
         }
-        <label for="repeatPassword" class="form__item">
-          @let repeatPassword = signupForm.repeatPassword();
-          @let isRepeatError =
-            repeatPassword.invalid() &&
-            (repeatPassword.touched() || repeatPassword.dirty());
+        @let repeatPassword = signupForm.repeatPassword();
+        @let isRepeatError =
+          repeatPassword.invalid() &&
+          (repeatPassword.touched() || repeatPassword.dirty());
+        <label
+          for="repeatPassword"
+          class="form__item"
+          
+        >
           <input
             [type]="isHideRepeatPassword() ? 'password' : 'text'"
             autocomplete="repeatPassword"
@@ -125,7 +169,7 @@
             class="form__item-input"
             id="repeatPassword"
             placeholder="Повторите пароль"
-            [style.borderColor]="isRepeatError ? 'red' : ''"
+            [style]="{ 'border-color': isRepeatError ? 'red' : '' }"
           />
           <div class="hide-password" (click)="toggleRepeatPasswordVisibility()">
             @if (isHideRepeatPassword()) {
@@ -157,15 +201,20 @@
             }
           </div>
         </label>
-        @if (repeatPassword.errors() && repeatPassword.dirty()) {
+        @if (repeatPassword.invalid() && repeatPassword.dirty()) {
           <div
             class="form__error-block"
-            animate.leave="deleting"
-            animate.enter="fade-in"
+            animate.leave="error-fade-out"
+            animate.enter="error-fade-in"
           >
             @for (err of repeatPassword.errors(); track $index) {
               @if (err) {
-                <span class="form__error-item">{{ err.message }}</span>
+                <span
+                  class="form__error-item"
+                  animate.leave="error-fade-out"
+                  animate.enter="error-fade-in"
+                  >{{ err.message }}</span
+                >
               }
             }
           </div>
