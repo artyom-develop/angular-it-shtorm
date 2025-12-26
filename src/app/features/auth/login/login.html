@@ -6,52 +6,49 @@
       animate.enter="slide-in-left"
     >
       <h1 class="login__title">Войти в личный кабинет</h1>
-      <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <form class="form" (submit)="onLogin($event)">
         <label for="email" class="form__item">
-          @let emailErrors = getZodErrors('email');
-          @let invalidEmail =
-            emailErrors.length > 0 &&
-            (loginForm.get('email')?.touched || loginForm.get('email')?.dirty);
+          @let email = loginForm.email();
+          @let isEmailError =
+            email.invalid() && (email.touched() || email.dirty());
           <input
             type="email"
-            formControlName="email"
+            [field]="loginForm.email"
             id="email"
             class="form__item-input"
             placeholder="Электронная почта"
             autocomplete="email"
-            [style.borderColor]="invalidEmail ? 'red' : ''"
+            [style.borderColor]="isEmailError ? 'red' : ''"
           />
         </label>
-        @if (emailErrors.length > 0 && invalidEmail) {
+        @if (email.invalid() && email.dirty()) {
           <div
             class="form__error-block"
             animate.leave="deleting"
             animate.enter="fade-in"
           >
-            @for (err of emailErrors; track $index) {
+            @for (err of email.errors(); track $index) {
               <span
                 class="form__error-item"
                 animate.leave="deleting"
                 animate.enter="fade-in"
-                >{{ err }}</span
+                >{{ err.message }}</span
               >
             }
           </div>
         }
         <label for="password" class="form__item form__item--password">
-          @let passwordErrors = getZodErrors('password');
-          @let invalidPassword =
-            passwordErrors.length > 0 &&
-            (loginForm.get('password')?.touched ||
-              loginForm.get('password')?.dirty);
+          @let password = loginForm.password();
+          @let isPasswordError =
+            password.invalid() && (password.touched() || password.dirty());
           <input
             [type]="isHidePassword() ? 'password' : 'text'"
-            formControlName="password"
+            [field]="loginForm.password!"
             class="form__item-input"
             id="password"
             placeholder="Пароль"
             autocomplete="password"
-            [style.borderColor]="invalidPassword ? 'red' : ''"
+            [style.borderColor]="isPasswordError ? 'red' : ''"
           />
           <div class="hide-password" (click)="togglePasswordVisibility()">
             @if (isHidePassword()) {
@@ -84,17 +81,14 @@
           </div>
         </label>
 
-        @if (passwordErrors.length > 0 && invalidPassword) {
+        @if (password.errors() && password.dirty()) {
           <div
             class="form__error-block"
             animate.leave="deleting"
             animate.enter="fade-in"
           >
-            @for (err of passwordErrors; track $index) {
-              <span
-                class="form__error-item"
-                >{{ err }}</span
-              >
+            @for (err of password.errors(); track $index) {
+              <span class="form__error-item">{{ err.message }}</span>
             }
           </div>
         }
@@ -102,17 +96,13 @@
           <input
             type="checkbox"
             class="form__item-checkbox"
-            formControlName="rememberMe"
+            [field]="loginForm.rememberMe"
             id="rememberMe"
           />
           <span> Запомнить меня </span>
         </label>
         <div class="form__action">
-          <button
-            class="btn form__btn"
-            type="submit"
-            [disabled]="!isFormValid()"
-          >
+          <button class="btn form__btn" [disabled]="loginForm().invalid()">
             Войти
           </button>
         </div>

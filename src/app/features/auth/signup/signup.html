@@ -1,70 +1,81 @@
 <div class="signup">
   <div class="container">
-    <div class="signup__content" animate.leave='slide-out-right' animate.enter='slide-in-left'>
+    <div
+      class="signup__content"
+      animate.leave="slide-out-right"
+      animate.enter="slide-in-left"
+    >
       <div class="signup__title">Регистрация на сайте</div>
-      <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignup()">
+      <form class="form" (submit)="onSignup($event)">
         <label for="name" class="form__item">
-          @let firstNameErrors = getZodErrors('firstName');
-          @let invalidFirstName =
-            firstNameErrors.length > 0 &&
-            (signUpForm.get('firstName')?.touched || signUpForm.get('firstName')?.dirty);
+          @let firstName = signupForm.firstName();
+          @let isFirstNameError =
+            firstName.invalid() && (firstName.touched() || firstName.dirty());
           <input
             type="text"
-            formControlName="firstName"
+            [field]="signupForm.firstName"
             class="form__item-input"
             id="name"
             placeholder="Ваше имя"
             autocomplete="firstName"
-            [style.borderColor]="invalidFirstName ? 'red' : ''"
+            [style.borderColor]="isFirstNameError ? 'red' : ''"
           />
         </label>
-        @if (firstNameErrors.length > 0 && invalidFirstName) {
-          <div class="form__error-block"     animate.leave="deleting"
-                animate.enter="fade-in">
-            @for (err of firstNameErrors; track $index) {
-              <span class="form__error-item" >{{ err }}</span>
+        @if (firstName.errors() && firstName.dirty()) {
+          <div
+            class="form__error-block"
+            animate.leave="deleting"
+            animate.enter="fade-in"
+          >
+            @for (err of firstName.errors(); track $index) {
+              <span class="form__error-item">{{ err.message }}</span>
             }
           </div>
         }
         <label for="email" class="form__item">
-          @let emailErrors = getZodErrors('email');
-          @let invalidEmail =
-            emailErrors.length > 0 &&
-            (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty);
+          @let email = signupForm.email();
+          @let isEmailError =
+            email.invalid() && (email.touched() || email.dirty());
           <input
             type="email"
-            formControlName="email"
+            [field]="signupForm.email"
             id="email"
             class="form__item-input"
             placeholder="Электронная почта"
             autocomplete="email"
-            [style.borderColor]="invalidEmail ? 'red' : ''"
+            [style.borderColor]="isEmailError ? 'red' : ''"
           />
         </label>
-        @if (emailErrors.length > 0 && invalidEmail) {
-          <div class="form__error-block"     animate.leave="deleting"
-                animate.enter="fade-in">
-            @for (err of emailErrors; track $index) {
-              <span class="form__error-item">{{ err }}</span>
+        @if (email.errors() && email.dirty()) {
+          <div
+            class="form__error-block"
+            animate.leave="deleting"
+            animate.enter="fade-in"
+          >
+            @for (err of email.errors(); track $index) {
+              <span class="form__error-item">{{ err.message }}</span>
             }
           </div>
         }
         <label for="password" class="form__item">
-          @let passwordErrors = getZodErrors('password');
-          @let invalidPassword =
-            passwordErrors.length > 0 &&
-            (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty);
+          @let password = signupForm.password();
+          @let isPasswordError =
+            password.invalid() && (password.touched() || password.dirty());
           <input
             [type]="isHidePassword() ? 'password' : 'text'"
-            formControlName="password"
+            [field]="signupForm.password"
             class="form__item-input"
             id="password"
             autocomplete="password"
             placeholder="Пароль"
-            [style.borderColor]="invalidPassword ? 'red' : ''"
+            [style.borderColor]="isPasswordError ? 'red' : ''"
           />
-           <div class="hide-password" (click)="togglePasswordVisibility()"     animate.leave="deleting"
-                animate.enter="fade-in">
+          <div
+            class="hide-password"
+            (click)="togglePasswordVisibility()"
+            animate.leave="deleting"
+            animate.enter="fade-in"
+          >
             @if (isHidePassword()) {
               <svg
                 width="24"
@@ -95,28 +106,28 @@
           </div>
         </label>
 
-        @if (passwordErrors.length > 0 && invalidPassword) {
+        @if (password.errors() && password.dirty()) {
           <div class="form__error-block">
-            @for (err of passwordErrors; track $index) {
-              <span class="form__error-item">{{ err }}</span>
+            @for (err of password.errors(); track $index) {
+              <span class="form__error-item">{{ err.message }}</span>
             }
           </div>
         }
         <label for="repeatPassword" class="form__item">
-          @let repeatPasswordErrors = getZodErrors('repeatPassword');
-          @let invalidPasswordRepeat =
-            repeatPasswordErrors.length > 0 &&
-            (signUpForm.get('repeatPassword')?.touched || signUpForm.get('repeatPassword')?.dirty);
+          @let repeatPassword = signupForm.repeatPassword();
+          @let isRepeatError =
+            repeatPassword.invalid() &&
+            (repeatPassword.touched() || repeatPassword.dirty());
           <input
             [type]="isHideRepeatPassword() ? 'password' : 'text'"
             autocomplete="repeatPassword"
-            formControlName="repeatPassword"
+            [field]="signupForm.repeatPassword"
             class="form__item-input"
             id="repeatPassword"
             placeholder="Повторите пароль"
-            [style.borderColor]="invalidPasswordRepeat ? 'red' : ''"
+            [style.borderColor]="isRepeatError ? 'red' : ''"
           />
-             <div class="hide-password" (click)="toggleRepeatPasswordVisibility()">
+          <div class="hide-password" (click)="toggleRepeatPasswordVisibility()">
             @if (isHideRepeatPassword()) {
               <svg
                 width="24"
@@ -146,44 +157,54 @@
             }
           </div>
         </label>
-        @if (repeatPasswordErrors.length > 0 && invalidPasswordRepeat) {
-          <div class="form__error-block"     animate.leave="deleting"
-                animate.enter="fade-in">
-            @for (err of repeatPasswordErrors; track $index) {
+        @if (repeatPassword.errors() && repeatPassword.dirty()) {
+          <div
+            class="form__error-block"
+            animate.leave="deleting"
+            animate.enter="fade-in"
+          >
+            @for (err of repeatPassword.errors(); track $index) {
               @if (err) {
-                <span class="form__error-item">{{ err }}</span>
+                <span class="form__error-item">{{ err.message }}</span>
               }
             }
           </div>
         }
         <label for="policy" class="form__item-policy">
-          @let agreeErrors = getZodErrors('agree');
-          @let invalidAgree =
-            agreeErrors.length > 0 &&
-            (signUpForm.get('agree')?.touched || signUpForm.get('agree')?.dirty);
+          @let agree = signupForm.agree();
+          @let isAgreeError =
+            agree.invalid() && (agree.touched() || agree.dirty());
           <input
             type="checkbox"
-            formControlName="agree"
+            [field]="signupForm.agree"
             class="form__item-checkbox"
-            [style.borderColor]="invalidAgree ? 'red' : ''"
+            [style.borderColor]="isAgreeError ? 'red' : ''"
             id="policy"
           />
           <span>
-            Я принимаю <a href="policy.html">условия пользовательского соглашения</a> и
-            <a href="policy.html#personal">даю согласие на обработку персональных данных</a>.
+            Я принимаю
+            <a href="policy.html">условия пользовательского соглашения</a> и
+            <a href="policy.html#personal"
+              >даю согласие на обработку персональных данных</a
+            >.
           </span>
         </label>
         <div class="form__action">
-          <button class="btn form__btn" type="submit" [disabled]="!isFormValid()">
+          <button class="btn form__btn" [disabled]="signupForm().invalid()">
             Зарегистрироваться
           </button>
         </div>
         <div class="form__login">
-          Уже есть аккаунт? <a class="form__login-link" routerLink="/login">Войти</a>
+          Уже есть аккаунт?
+          <a class="form__login-link" routerLink="/login">Войти</a>
         </div>
       </form>
     </div>
-    <div class="signup__image" animate.leave='slide-out-left' animate.enter='slide-in-right'>
+    <div
+      class="signup__image"
+      animate.leave="slide-out-left"
+      animate.enter="slide-in-right"
+    >
       <img
         src="/assets/images/auth/signup.png
 			"
