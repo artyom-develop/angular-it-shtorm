@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs';
 import { ArticleCard } from '../../../shared/components/article-card/article-card';
 import { FilterLabel } from '../../../shared/components/filter-label/filter-label';
 import { CategoryFilter } from '../../../shared/components/filter/category-filter/category-filter';
@@ -55,12 +55,29 @@ export class Blog {
 
   constructor() {
     this.activatedRoute.queryParams
-      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
-      .subscribe(params => {
-        this.activateParams = ActiveParamsUtil.processParams(params);
+      .pipe(
+        debounceTime(300),
+        switchMap(params => {
+          this.activateParams = ActiveParamsUtil.processParams(params);
+          this.updateLabelsFromParams();
+          this.isLoading.set(true);
+          return this.articlesService.getArticles(this.activateParams);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((data: ArticleResponse | DefaultResponse) => {
+        if ((data as DefaultResponse).error !== undefined) {
+          this.isLoading.set(false);
+          return;
+        }
 
-        this.updateLabelsFromParams();
-        this.loadArticles();
+        const pages = [];
+        for (let i = 1; i <= (data as ArticleResponse).pages; i++) {
+          pages.push(i);
+        }
+        this.pages.set(pages);
+        this.articles.set((data as ArticleResponse).items);
+        this.isLoading.set(false);
       });
   }
 
@@ -79,26 +96,5 @@ export class Blog {
 
       this.labels.set(selectedLabels);
     }
-  }
-
-  loadArticles() {
-    this.isLoading.set(true);
-    this.articlesService
-      .getArticles(this.activateParams)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data: ArticleResponse | DefaultResponse) => {
-        if ((data as DefaultResponse).error !== undefined) {
-          return;
-        }
-
-        const pages = [];
-        for (let i = 1; i <= (data as ArticleResponse).pages; i++) {
-          pages.push(i);
-        }
-        this.pages.set(pages);
-
-        this.articles.set((data as ArticleResponse).items);
-        this.isLoading.set(false);
-      });
   }
 }

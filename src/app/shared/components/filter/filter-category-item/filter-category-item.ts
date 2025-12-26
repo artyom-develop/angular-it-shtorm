@@ -1,7 +1,7 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryInterface } from '../../../../types/categories/categories.interface'
-import { ActivateParamsInterface } from '../../../../types/categories/activateParams.interface'
+import { ActivateParamsInterface } from '../../../../types/categories/activateParams.interface';
+import { CategoryInterface } from '../../../../types/categories/categories.interface';
 
 @Component({
   selector: 'filter-category-item',
@@ -26,25 +26,23 @@ export class FilterCategoryItem {
   }
 
   updateFilterParam(url: string) {
-    this.isActive.set(!this.isActive());
-    const newCategories = [...(this.activeParams().categories || [])];
+    const currentCategories = this.activeParams().categories || [];
+    const newCategories = [...currentCategories];
 
     const foundIndex = newCategories.indexOf(url);
 
-    if (foundIndex !== -1 && !this.isActive()) {
+    if (foundIndex !== -1) {
       newCategories.splice(foundIndex, 1);
-    } else if (foundIndex === -1 && this.isActive()) {
+    } else {
       newCategories.push(url);
     }
 
-    const newParams = {
-      ...this.activeParams(),
-      categories: newCategories,
-      page: 1,
-    };
-
     this.router.navigate(['/blog'], {
-      queryParams: newParams,
+      queryParams: {
+        categories: newCategories.length > 0 ? newCategories : null,
+        page: 1,
+      },
+      queryParamsHandling: 'merge',
     });
   }
 }

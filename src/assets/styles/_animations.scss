@@ -1,10 +1,10 @@
 // === Fade Animations ===
 .fade-in {
-  animation: fadeIn 300ms ease-in;
+  animation: fadeIn 400ms ease-in-out;
 }
 
 .fade-out {
-  animation: fadeOut 300ms ease-out;
+  animation: fadeOut 400ms ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -22,6 +22,37 @@
   }
   to {
     opacity: 0;
+  }
+}
+
+// === Scale Fade Animations ===
+.scale-fade-in {
+  animation: scaleFadeIn 400ms ease-out;
+}
+
+.scale-fade-out {
+  animation: scaleFadeOut 300ms ease-in;
+}
+
+@keyframes scaleFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
   }
 }
 

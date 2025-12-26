@@ -6,13 +6,13 @@
       [style.marginBottom]="labels().length > 4 ? '40px' : '0'"
     >
       <div class="filter__labels">
-        @for (label of labels(); track $index) {
+        @for (label of labels(); track label) {
           <app-filter-label
             [categories]="categories()"
             [label]="label"
             [activeParams]="activateParams"
-            animate.enter="fade-in"
-            animate.leave="fade-out"
+            animate.enter="scale-fade-in"
+            animate.leave="scale-fade-out"
           ></app-filter-label>
         }
       </div>
@@ -24,11 +24,11 @@
       @if (isLoading()) {
         <app-loading></app-loading>
       } @else if (articles() && articles()!.length > 0) {
-        @for (article of articles()!; track $index) {
+        @for (article of articles()!; track article.id) {
           <article-card
             [article]="article"
-            animate.enter="fade-in"
-            animate.leave="fade-out"
+            animate.enter="scale-fade-in"
+            animate.leave="scale-fade-out"
           ></article-card>
         }
       } @else {
