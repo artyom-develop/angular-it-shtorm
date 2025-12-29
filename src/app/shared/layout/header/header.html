@@ -76,7 +76,7 @@
         />
       </svg>
       @if (isLoggedIn() && userInfo()) {
-        <span class="header__profile-info" (click)="toggleMenu($event)"
+        <span class="header__profile-info" (click)="toggleMenu()"
           >Привет, {{ userInfo()!.name }}</span
         >
         @if (isShowMenu()) {

@@ -43,7 +43,7 @@ export class Signup {
   router = inject(Router);
   destroyRef = inject(DestroyRef);
   location = inject(Location);
-  redirectTimeout: number | null = null;
+  // redirectTimeout: number | null = null;
   isHidePassword = signal<boolean>(true);
   isHideRepeatPassword = signal<boolean>(true);
 
@@ -121,12 +121,12 @@ export class Signup {
               'Вы успешно зарегистрировались в системе.'
             );
 
-            if (this.redirectTimeout) {
-              clearTimeout(this.redirectTimeout);
-            }
-            this.redirectTimeout = setTimeout(() => {
-              this.router.navigate(['/']);
-            }, 100);
+            // if (this.redirectTimeout) {
+            //   clearTimeout(this.redirectTimeout);
+            // }
+            // this.redirectTimeout = setTimeout(() => {
+            //   this.router.navigate(['/']);
+            // }, 100);
           },
           error: (err: HttpErrorResponse) => {
             if (err.error && err.error.message) {

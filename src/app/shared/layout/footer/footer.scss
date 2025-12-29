@@ -43,6 +43,9 @@
             &:hover {
               color: $second-color;
             }
+            .active {
+              color: $second-color;
+            }
           }
         }
       }

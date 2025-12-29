@@ -28,10 +28,8 @@ export class Comments {
      description: string
   }[]>([]);
   currentSlideIndex = signal(0);
-  autoplayIntervalSignal = signal(0);
   private destroyRef = inject(DestroyRef);
   private sliderService = inject(SliderService);
-  private autoplayTimeout: number | null = null;
 
   constructor() {
     this.comments.set([
@@ -90,27 +88,6 @@ export class Comments {
           'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!',
       },
     ]);
-    this.currentSlideIndex = this.sliderService.currentSlideIndex;
-    this.autoplayIntervalSignal = this.sliderService.autoplayIntervalSignal;
-    effect(() => {
-      if (this.sliderService.currentSlideIndex() !== this.currentSlideIndex()) {
-        this.currentSlideIndex = this.sliderService.currentSlideIndex;
-      }
-    });
-    effect(() => {
-      if (
-        this.autoplayIntervalSignal() !==
-        this.sliderService.autoplayIntervalSignal()
-      ) {
-        this.autoplayIntervalSignal = this.sliderService.autoplayIntervalSignal;
-      }
-    });
-
-    this.destroyRef.onDestroy(() => {
-      if (this.autoplayTimeout) {
-        clearTimeout(this.autoplayTimeout);
-      }
-    });
   }
 
   prevToSlide(event: MouseEvent) {

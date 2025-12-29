@@ -7,19 +7,7 @@ import { OffersEnum } from '../../types/offereEnum.enum';
   providedIn: 'root',
 })
 export class SliderService {
-  private destroyRef = inject(DestroyRef);
   currentSlideIndex = signal(0);
-  autoplayIntervalSignal = signal(10000);
-
-  private autoplayTimeout: number | null = null;
-
-  constructor() {
-    this.destroyRef.onDestroy(() => {
-      if (this.autoplayTimeout) {
-        clearTimeout(this.autoplayTimeout);
-      }
-    });
-  }
 
   slides = signal<SliderInterface[]>([
     {
@@ -57,70 +45,23 @@ export class SliderService {
   ]);
 
   nextToSlide(event: MouseEvent, carousel: Carousel) {
-    this.autoplayIntervalSignal.set(0);
-
     if (carousel) {
       carousel.navForward(event);
-      // Синхронизируем индекс после навигации
-      setTimeout(() => {
-        this.currentSlideIndex.set(carousel.page);
-      }, 50);
     }
-
-    if (this.autoplayTimeout) {
-      clearTimeout(this.autoplayTimeout);
-    }
-
-    this.autoplayTimeout = setTimeout(() => {
-      this.autoplayIntervalSignal.set(10000);
-    }, 5000);
   }
 
   prevToSlide(event: MouseEvent, carousel: Carousel) {
-    this.autoplayIntervalSignal.set(0);
-
     if (carousel) {
       carousel.navBackward(event);
-      // Синхронизируем индекс после навигации
-      setTimeout(() => {
-        this.currentSlideIndex.set(carousel.page);
-      }, 50);
     }
-
-    if (this.autoplayTimeout) {
-      clearTimeout(this.autoplayTimeout);
-    }
-
-    this.autoplayTimeout = setTimeout(() => {
-      this.autoplayIntervalSignal.set(10000);
-    }, 5000);
   }
   goToSlide(index: number, carousel: Carousel, event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 
-    // Останавливаем автопрокрутку
-    this.autoplayIntervalSignal.set(0);
-
     if (carousel && carousel.page !== index) {
-      // Прямое присвоение страницы - надежнее, чем множественные navForward/navBackward
       carousel.page = index;
-
-      // Обновляем currentSlideIndex сразу для синхронизации UI
-      this.currentSlideIndex.set(index);
-
-      // Принудительно вызываем обновление carousel
       carousel.onPage.emit({ page: index });
     }
-
-    // Очищаем предыдущий таймаут
-    if (this.autoplayTimeout) {
-      clearTimeout(this.autoplayTimeout);
-    }
-
-    // Возобновляем автопрокрутку через 5 секунд
-    this.autoplayTimeout = setTimeout(() => {
-      this.autoplayIntervalSignal.set(10000);
-    }, 5000);
   }
 }

@@ -40,7 +40,7 @@ export class Login {
   userService = inject(UserService);
   destroyRef = inject(DestroyRef);
   location = inject(Location);
-  redirectTimeout: number | null = null;
+  // redirectTimeout: number | null = null;
   isHidePassword = signal<boolean>(true);
 
   loginModel = signal<LoginModel>({
@@ -106,12 +106,12 @@ export class Login {
               'Вы успешно вошли в систему.'
             );
 
-            if (this.redirectTimeout) {
-              clearTimeout(this.redirectTimeout);
-            }
-            this.redirectTimeout = setTimeout(() => {
-              this.router.navigate(['/'])
-            }, 100);
+            // if (this.redirectTimeout) {
+            //   clearTimeout(this.redirectTimeout);
+            // }
+            // this.redirectTimeout = setTimeout(() => {
+              this.router.navigate(['/']);
+            // }, 100);
           },
           error: (err: HttpErrorResponse) => {
             if (err.error && err.error.message) {

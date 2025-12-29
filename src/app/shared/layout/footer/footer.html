@@ -8,19 +8,41 @@
       <nav>
         <ul class="menu">
           <li class="menu__item">
-            <a class="menu__link" routerLink="/">Услуги</a>
+            <a
+              id="offers-link"
+              class="menu__link"
+              (click)="navigateWithFragment('/', 'offers')"
+              >Услуги</a
+            >
           </li>
           <li class="menu__item">
-            <a class="menu__link" routerLink="/">О нас</a>
+            <a
+              class="menu__link"
+              (click)="navigateWithFragment('/', 'advantages')"
+              >О нас</a
+            >
           </li>
           <li class="menu__item">
-            <a class="menu__link" routerLink="/">Статьи</a>
+            <a
+              class="menu__link"
+              routerLink="/blog"
+              [routerLinkActive]="'active'"
+              >Статьи</a
+            >
           </li>
           <li class="menu__item">
-            <a class="menu__link" routerLink="/">Отзывы</a>
+            <a
+              class="menu__link"
+              (click)="navigateWithFragment('/', 'comments')"
+              >Отзывы</a
+            >
           </li>
           <li class="menu__item">
-            <a class="menu__link" routerLink="/">Контакты</a>
+            <a
+              class="menu__link"
+              (click)="navigateWithFragment('/', 'contacts')"
+              >Контакты</a
+            >
           </li>
         </ul>
       </nav>
@@ -29,12 +51,16 @@
     <div class="footer__info">
       <div class="footer__info-item">
         <h3 class="footer__info-title">Адрес</h3>
-        <address class="footer__info-text">Пресненская наб., 12, Москва, Россия, 123317.</address>
+        <address class="footer__info-text">
+          Пресненская наб., 12, Москва, Россия, 123317.
+        </address>
       </div>
       <div class="footer__info-item">
         <h3 class="footer__info-title">Телефон</h3>
         <span class="footer__info-text"> +7 (499) 343-13-34 </span>
-        <a href="tel:+7 (499) 343-13-34" class="btn footer__btn"> Перезвоните мне </a>
+        <a href="tel:+7 (499) 343-13-34" class="btn footer__btn">
+          Перезвоните мне
+        </a>
       </div>
       <div class="footer__info-item">
         <h3 class="footer__info-title">E-mail</h3>
@@ -88,6 +114,6 @@
         </div>
       </div>
     </div>
-    <div class="footer__rights">© {{date}}. Все права защищены</div>
+    <div class="footer__rights">© {{ date }}. Все права защищены</div>
   </div>
 </div>

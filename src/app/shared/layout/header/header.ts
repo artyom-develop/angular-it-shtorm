@@ -24,6 +24,7 @@ import { UserService } from '../../services/user';
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class Header {
   private router = inject(Router);
@@ -39,7 +40,7 @@ export class Header {
   });
 
   isShowMenu = signal<boolean>(false);
-  private scrollTimeout: number | null = null;
+  private scrollTimeout!: ReturnType<typeof setTimeout>;
 
   navigateWithFragment(route: string, fragment: string) {
     this.router.navigate([route], { fragment }).then(() => {
@@ -52,8 +53,7 @@ export class Header {
     });
   }
 
-  toggleMenu(event: Event) {
-    event.stopPropagation();
+  toggleMenu() {
     this.isShowMenu.set(!this.isShowMenu());
   }
 

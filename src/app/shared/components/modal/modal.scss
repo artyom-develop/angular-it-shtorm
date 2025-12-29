@@ -60,12 +60,13 @@
       position: relative;
 
       .offers__list {
+        overflow-y: hidden;
         position: absolute;
         top: 52px;
         left: 0;
         width: 422px;
         max-height: 150px;
-        overflow-y: auto;
+      
         border: 1.5px solid #709fdc;
         border-radius: 5px;
         background: $white;

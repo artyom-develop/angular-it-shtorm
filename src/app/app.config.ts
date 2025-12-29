@@ -2,17 +2,18 @@ import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
-import {
-  provideRouter,
-  withEnabledBlockingInitialNavigation,
-  withInMemoryScrolling,
-} from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import {
   provideHttpClient,
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withIncrementalHydration,
+} from '@angular/platform-browser';
 import Aura from '@primeuix/themes/aura';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
-      withEnabledBlockingInitialNavigation(),
+      
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
@@ -32,5 +33,6 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({ theme: { preset: Aura } }),
     MessageService,
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideClientHydration(withEventReplay(),withIncrementalHydration()),
   ],
 };

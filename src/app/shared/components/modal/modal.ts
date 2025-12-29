@@ -56,7 +56,7 @@ export class Modal {
     },
   });
 
-  private timeOut: number | null = null;
+  private timeOut!: ReturnType<typeof setTimeout>;
   onHideOffers(value: boolean) {
     if (value) {
       this.isShowOffers.set(false);
