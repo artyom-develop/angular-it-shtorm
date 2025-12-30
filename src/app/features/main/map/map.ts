@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { title } from '@primeuix/themes/aura/card';
 import { RouterLink } from "@angular/router";
 
@@ -7,6 +7,7 @@ import { RouterLink } from "@angular/router";
   imports: [RouterLink],
   templateUrl: './map.html',
   styleUrl: './map.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Map {
   contacts = signal<{ title: string; descr?: string; links: boolean,  }[]>([

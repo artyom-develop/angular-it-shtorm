@@ -1,10 +1,11 @@
-import { isPlatformBrowser } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginResponse } from '../../types/auth/loginResponse.interface';
 import { DefaultResponse } from '../../types/defaultResponse.interface';
+import { IS_BROWSER } from '../../shared/tokens/browser.token';
 
 @Injectable({
   providedIn: 'root',
@@ -14,19 +15,16 @@ export class AuthService {
   public refreshTokenKey: string = environment.refreshTokenKey;
   public userIdKey: string = environment.userIdKey;
 
-  private platformId = inject(PLATFORM_ID);
+  private isBrowser = inject(IS_BROWSER);
 
   public isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    isPlatformBrowser(this.platformId)
-      ? !!localStorage.getItem(environment.accessTokenKey)
-      : false
+    this.isBrowser ? !!localStorage.getItem(environment.accessTokenKey) : false
   );
-  private isLogged: boolean = isPlatformBrowser(this.platformId)
+  private isLogged: boolean = this.isBrowser
     ? !!localStorage.getItem(environment.accessTokenKey)
     : false;
 
   private http = inject(HttpClient);
-
 
   login(
     email: string,
@@ -86,7 +84,7 @@ export class AuthService {
   }
 
   getTokens() {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       return { accessToken: null, refreshToken: null };
     }
     return {
@@ -99,7 +97,7 @@ export class AuthService {
     this.userId = null;
   }
   removeTokens(): void {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       this.isLogged = false;
       this.isLogged$.next(false);
       return;
@@ -110,7 +108,7 @@ export class AuthService {
     this.isLogged$.next(false);
   }
   setTokens(accessToken: string, refreshToken: string): void {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       this.isLogged = true;
       this.isLogged$.next(true);
       return;
@@ -122,13 +120,13 @@ export class AuthService {
   }
 
   get userId(): string | null {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       return null;
     }
     return localStorage.getItem(this.userIdKey);
   }
   set userId(userId: string | null) {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       return;
     }
     if (userId) {

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, switchMap } from 'rxjs';
@@ -21,6 +21,7 @@ import { DefaultResponse } from '../../../types/defaultResponse.interface';
   templateUrl: './blog.html',
   styleUrl: './blog.scss',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Blog {
   articlesService = inject(ArticlesService);

@@ -7,6 +7,11 @@
 @defer (hydrate on viewport) {
   <app-advantages id="advantages" animate.enter="fade-in"></app-advantages>
 }
+
 <app-populars animate.enter="fade-in"></app-populars>
-<app-comments id="comments" animate.enter="fade-in"></app-comments>
-<app-map id="contacts" animate.enter="fade-in"></app-map>
+@defer (hydrate on viewport) {
+  <app-comments id="comments" animate.enter="fade-in"></app-comments>
+}
+@defer (hydrate on viewport) {
+  <app-map id="contacts" animate.enter="fade-in"></app-map>
+}

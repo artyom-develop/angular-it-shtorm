@@ -19,12 +19,13 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
+import { cacheInterceptorInterceptor } from './core/interceptors/cache-interceptor-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
-      
+
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
@@ -32,7 +33,10 @@ export const appConfig: ApplicationConfig = {
     ),
     providePrimeNG({ theme: { preset: Aura } }),
     MessageService,
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    provideClientHydration(withEventReplay(),withIncrementalHydration()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([cacheInterceptorInterceptor, authInterceptor])
+    ),
+    provideClientHydration(withEventReplay(), withIncrementalHydration()),
   ],
 };

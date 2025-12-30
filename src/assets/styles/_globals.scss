@@ -18,6 +18,96 @@ body {
   font-family: $montserrat-regular;
   color: $base-color;
   scroll-behavior: smooth;
+  // Оптимизация прокрутки
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+// Оптимизация производительности для прокрутки
+* {
+  // Используем только transform и opacity для плавных анимаций
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  // Предотвращаем layout thrashing
+  will-change: auto;
+}
+
+// Оптимизация для элементов с анимациями
+.animated,
+.fade-in,
+.fade-out,
+.scale-fade-in,
+.scale-fade-out,
+.slide-in-left,
+.slide-in-right,
+.slide-in-up,
+.slide-in-down {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Отключаем анимации при prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Специфические переходы для интерактивных элементов
+button,
+a,
+input,
+textarea,
+select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Плавные переходы для hover эффектов
+button:hover,
+a:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Оптимизация изображений
+img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+// Предотвращаем layout shifts
+img,
+video,
+iframe {
+  aspect-ratio: auto;
+}
+
+// Оптимизация для карточек и списков
+.card,
+.article-card,
+.slider-item {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+// Оптимизация для списков
+.list-item,
+.pagination-item {
+  contain: layout style;
+}
+
+// GPU acceleration для transform
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 // Убираем все лишние стили для app-root и body

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   effect,
@@ -19,6 +20,7 @@ import { FormatTextPipe } from "../../../shared/pipes/format-text-pipe";
   imports: [CarouselModule, CommonModule, FormatTextPipe],
   templateUrl: './comments.html',
   styleUrl: './comments.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Comments {
   @ViewChild('carousel') carousel!: Carousel;
