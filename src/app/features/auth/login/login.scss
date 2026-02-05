@@ -7,17 +7,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 185px;
     .login__content {
       max-width: 429px;
       .login__title {
         @include lora-title(36px);
         margin-bottom: 40px;
-				white-space: nowrap;
+        white-space: nowrap;
       }
       form {
         display: flex;
         flex-direction: column;
         .form__item {
+          position: relative;
           &:not(:last-child) {
             margin-bottom: 5px;
           }
@@ -26,6 +28,7 @@
           }
           .form__item-input {
             @include input(422px);
+
             &::placeholder {
               font-family: $montserrat-regular;
               font-size: 14px;
@@ -43,7 +46,7 @@
           line-height: 130%;
           color: $base-color;
           margin-bottom: 43px;
-       
+
           span {
             max-width: 360px;
             a {

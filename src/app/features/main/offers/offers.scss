@@ -34,8 +34,8 @@
           line-height: 130%;
           color: #071739;
           margin-bottom: 15px;
-					max-width: 286px;
-					height: 90px;
+          max-width: 286px;
+          height: 90px;
         }
         .offers__list-bottom {
           display: flex;
@@ -51,10 +51,10 @@
           .offers__list-btn {
             width: 163px;
             height: 51px;
-						background: #709fdc;
-						&:hover{
-							background: #618abf;
-						}
+            background: #709fdc;
+            &:hover {
+              background: #618abf;
+            }
           }
         }
       }

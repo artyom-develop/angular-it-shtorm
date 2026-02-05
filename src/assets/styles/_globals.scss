@@ -1,5 +1,7 @@
 @use 'variables' as *;
 @use 'ui/checkbox' as *;
+@use 'mixins' as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +10,112 @@
 
 html,
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: white;
   font-size: 16px;
   font-family: $montserrat-regular;
   color: $base-color;
+  scroll-behavior: smooth;
+  // Оптимизация прокрутки
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
-/* Сбрасываем почти все стили user agent */
-*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+// Оптимизация производительности для прокрутки
+* {
+  // Используем только transform и opacity для плавных анимаций
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  // Предотвращаем layout thrashing
+  will-change: auto;
+}
+
+// Оптимизация для элементов с анимациями
+.animated,
+.fade-in,
+.fade-out,
+.scale-fade-in,
+.scale-fade-out,
+.slide-in-left,
+.slide-in-right,
+.slide-in-up,
+.slide-in-down {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Отключаем анимации при prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Специфические переходы для интерактивных элементов
+button,
+a,
+input,
+textarea,
+select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Плавные переходы для hover эффектов
+button:hover,
+a:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Оптимизация изображений
+img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+// Предотвращаем layout shifts
+img,
+video,
+iframe {
+  aspect-ratio: auto;
+}
+
+// Оптимизация для карточек и списков
+.card,
+.article-card,
+.slider-item {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+// Оптимизация для списков
+.list-item,
+.pagination-item {
+  contain: layout style;
+}
+
+// GPU acceleration для transform
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Убираем все лишние стили для app-root и body
+// Они теперь в layout.scss
+
+*:where(
+  :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+) {
   all: unset;
   display: revert;
 }
@@ -85,9 +185,11 @@ table {
   color: $white;
   transition: all 0.3s ease;
   text-align: center;
+
   &:hover {
     background-color: $second-color-active;
   }
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -95,11 +197,13 @@ table {
 }
 
 .form__error-block {
-  margin-top: 5px;
-  margin-bottom: 10px;
+  max-width: 422px;
+  height: 30px;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  transition: all 0.3s ease;
 }
 
 .form__error-item {
@@ -111,14 +215,18 @@ table {
   font-family: $montserrat-regular;
   line-height: 130%;
   opacity: 0;
+  max-width: 422px;
   transform: translateY(-8px);
-  transition: opacity 0.25s, transform 0.25s;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
 }
 
 .form__error-block .form__error-item {
   opacity: 1;
   transform: translateY(0);
 }
+
 .p-carousel-prev-button {
   position: absolute;
   top: 250px !important;
@@ -133,4 +241,82 @@ table {
 
 .p-carousel-content-container {
   position: relative;
+}
+
+p-carousel-item.p-carousel-item-active.p-carousel-item-end {
+  min-width: 390px;
+  width: 390px;
+}
+
+.p-carousel-item.p-carousel-item-active {
+  min-width: 396px;
+  width: 396px;
+}
+
+.p-carousel-item {
+  min-width: 396px;
+  width: 396px;
+}
+
+svg {
+  cursor: pointer;
+}
+
+h3 {
+  font-family: $montserrat-medium;
+  font-size: 20px;
+  margin-bottom: 20px;
+  line-height: 130%;
+  color: #709fdc;
+}
+
+p {
+  font-family: $montserrat-regular;
+  font-size: 14px;
+  line-height: 130%;
+  color: #071739;
+  margin-bottom: 20px;
+}
+
+br {
+  margin-bottom: 40px;
+}
+
+ul {
+  padding-left: 10px;
+
+  li {
+    margin-bottom: 10px;
+    font-family: $montserrat-regular;
+    font-size: 14px;
+    line-height: 130%;
+    color: #071739;
+
+    &::before {
+      content: '• ';
+      color: $base-color;
+      margin-right: 10px;
+    }
+  }
+}
+
+.hide-password {
+  position: absolute;
+  top: calc(50% - 11px);
+  right: 15px;
+  cursor: pointer;
+}
+
+.comments {
+  .p-carousel-item.p-carousel-item-active {
+    max-width: 388px !important;
+    width: 388px !important;
+    margin-right: 25px;
+  }
+  .p-carousel-item.p-carousel-item-active.p-carousel-item-start {
+    margin-left: 5px !important;
+  }
+  .p-carousel-item.p-carousel-item-active.p-carousel-item-end {
+    margin-right: 0 !important;
+  }
 }

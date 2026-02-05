@@ -1,6 +1,6 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { ModalService } from '../../../shared/services/modal-service';
-import { OfferInterface } from '../../../types/main/offerInterface';
+import { ArticleInterface } from '../../../types/main/offer.interface';
 import { ModalType } from '../../../types/modal/modalRequest.interface';
 import { OffersEnum } from '../../../types/offereEnum.enum';
 
@@ -9,9 +9,10 @@ import { OffersEnum } from '../../../types/offereEnum.enum';
   imports: [],
   templateUrl: './offers.html',
   styleUrl: './offers.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Offers {
-  @Input() fullOffers: OfferInterface[] = [];
+  @Input() fullOffers: ArticleInterface[] = [];
   modalService = inject(ModalService);
   modalOpen(offerTitle: OffersEnum) {
     this.modalService.setOffer({ offer: offerTitle, type: ModalType.order });

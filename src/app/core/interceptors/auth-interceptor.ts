@@ -15,8 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       headers: req.headers.set('x-auth', tokens.accessToken),
     });
     return next(authReq).pipe(
-    
-      catchError((error) => {
+      catchError(error => {
         if (
           error.status === 401 &&
           !authReq.url.includes('/login') &&
@@ -57,7 +56,7 @@ function handle401Error(
       });
       return next(authReq);
     }),
-    catchError((err) => {
+    catchError(err => {
       authService.removeTokens();
       router.navigate(['/']);
       return throwError(() => err);

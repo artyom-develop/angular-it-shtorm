@@ -7,7 +7,6 @@ import { ModalService } from './shared/services/modal-service';
 
 @Component({
   selector: 'app-root',
-
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [RouterOutlet, Toast, Modal],

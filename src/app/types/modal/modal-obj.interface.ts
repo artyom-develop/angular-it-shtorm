@@ -1,6 +1,6 @@
-import { ModalType } from './modalRequest.interface'
+import { ModalType } from './modalRequest.interface';
 
-export interface ModalObj{
+export interface ModalObj {
   offer: string;
   type: ModalType;
 }

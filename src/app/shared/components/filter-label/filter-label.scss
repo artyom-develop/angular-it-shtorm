@@ -1,0 +1,22 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.filter__label {
+  display: flex;
+  gap: 8px;
+  border: 1.5px solid $second-color;
+  border-radius: 5px;
+  padding: 8px 20px;
+
+  span {
+    font-family: $montserrat-regular;
+    font-size: 16px;
+    color: $second-color;
+  }
+  .filter__label-delete {
+    svg {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  }
+}

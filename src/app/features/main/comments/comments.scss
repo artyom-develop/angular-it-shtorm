@@ -1,0 +1,62 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.comments {
+  padding-bottom: 60px;
+  padding-top: 60px;
+  .comments__container {
+    position: relative;
+    .comments__tile {
+      @include lora-title(38px);
+      margin-bottom: 20px;
+    }
+
+    .comments__slider {
+      .comments-slide {
+        border: 1.5px solid #709fdc;
+        border-radius: 5px;
+        width: 390px;
+        background-color: #fff;
+        padding: 30px;
+
+        .comment__head {
+          display: flex;
+          gap: 26px;
+          align-items: center;
+          margin-bottom: 15px;
+          .comment__avatar {
+            img {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+            }
+          }
+          .comment__name {
+            font-family: $montserrat-semiBold;
+            font-size: 16px;
+            color: $second-color;
+          }
+        }
+        .comment__text {
+          font-family: $montserrat-regular;
+          font-size: 16px;
+          line-height: 140%;
+          color: #071739;
+          min-height: 134px;
+        }
+      }
+    }
+    .prev {
+      position: absolute;
+      left: -25px;
+      top: 187px;
+      cursor: pointer;
+    }
+    .next {
+      position: absolute;
+      right: -25px;
+      top: 187px;
+      cursor: pointer;
+    }
+  }
+}

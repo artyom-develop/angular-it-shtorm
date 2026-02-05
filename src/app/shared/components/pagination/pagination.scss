@@ -1,0 +1,64 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+.blog__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 46px;
+
+  .blog__pagination-prev {
+    cursor: pointer;
+
+    svg {
+      transform: rotate(90deg);
+    }
+
+    &.disabled {
+      svg {
+        cursor: not-allowed;
+
+        path {
+          fill: #bebebe;
+        }
+      }
+    }
+  }
+
+  .blog__pagination-next {
+    cursor: pointer;
+
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    &.disabled {
+      svg {
+        cursor: not-allowed;
+
+        path {
+          fill: #bebebe;
+        }
+      }
+    }
+  }
+
+  .blog__pagination-numbers {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+
+    .blog__pagination-number {
+      padding: 10px;
+      font-family: $montserrat-regular;
+      font-size: 20px;
+      text-align: center;
+      color: $base-color;
+
+      &.active {
+        color: #b9d5fd;
+				cursor: not-allowed;
+      }
+    }
+  }
+}

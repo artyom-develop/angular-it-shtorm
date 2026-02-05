@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
-import { Toast } from 'primeng/toast'
-import { MessageService } from 'primeng/api'
+import { MessageService } from 'primeng/api';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [ MessageService],
+      providers: [MessageService],
     }).compileComponents();
   });
 
@@ -16,5 +15,4 @@ describe('App', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
 });

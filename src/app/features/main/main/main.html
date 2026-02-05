@@ -1,2 +1,17 @@
-<app-slider></app-slider>
-<app-offers [fullOffers]="fullOffers"></app-offers>
+<app-slider animate.enter="fade-in"></app-slider>
+<app-offers
+  id="offers"
+  [fullOffers]="fullOffers"
+  animate.enter="fade-in"
+></app-offers>
+@defer (hydrate on viewport) {
+  <app-advantages id="advantages" animate.enter="fade-in"></app-advantages>
+}
+
+<app-populars animate.enter="fade-in"></app-populars>
+@defer (hydrate on viewport) {
+  <app-comments id="comments" animate.enter="fade-in"></app-comments>
+}
+@defer (hydrate on viewport) {
+  <app-map id="contacts" animate.enter="fade-in"></app-map>
+}

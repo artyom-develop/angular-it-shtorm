@@ -1,0 +1,114 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.blog {
+  padding-top: 80px;
+  padding-bottom: 120px;
+
+  .container {
+    .blog__title {
+      @include lora-title(38px);
+      margin-bottom: 40px;
+    }
+
+    .blog__filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      .filter__labels {
+        max-width: 608px;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 12px;
+        row-gap: 12px;
+      }
+
+      .blog__filter {
+        font-family: $montserrat-regular;
+        font-size: 16px;
+        color: $base-color;
+
+        .blog__filter-closed {
+          width: 148px;
+          padding: 12px 0 12px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          .blog__filter-title {
+            font-family: $montserrat-regular;
+            font-size: 16px;
+            color: $base-color;
+          }
+          svg {
+            transition: transform 0.3s ease;
+            transform: rotate(0deg);
+          }
+          &.open {
+            width: 257px;
+            padding: 12px 23px;
+            border-radius: 5px 5px 0 0;
+            background: #b9d5fd;
+            transition: all 0.3s ease;
+            svg {
+              transform: rotate(-180deg);
+            }
+          }
+        }
+
+        .blog__filter-open {
+          position: relative;
+
+          .blog__filter-categories {
+            position: absolute;
+            left: 0;
+            background: $white;
+            padding: 12px 23px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 1000;
+            border: 1.5px solid #b9d5fd;
+            border-radius: 0 0 5px 5px;
+            width: 257px;
+
+            .blog__filter-category {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              .blog__filter-category-text {
+                font-family: $montserrat-regular;
+                font-size: 16px;
+                color: #071739;
+
+                &.disabled {
+                  color: #bebebe;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .blog__articles {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      row-gap: 40px;
+      column-gap: 24px;
+      margin-bottom: 60px;
+      min-height: 300px;
+      span {
+        font-size: 38px;
+        font-family: $montserrat-semiBold;
+        color: $base-color;
+      }
+    }
+  }
+}

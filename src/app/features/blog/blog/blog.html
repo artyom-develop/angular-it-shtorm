@@ -1,0 +1,50 @@
+<div class="blog">
+  <div class="container">
+    <div class="blog__title">Блог</div>
+    <div
+      class="blog__filters"
+      [style.marginBottom]="labels().length > 4 ? '40px' : '0'"
+    >
+      <div class="filter__labels">
+        @for (label of labels(); track label) {
+            <app-filter-label
+              [categories]="categories()"
+              [label]="label"
+              [activeParams]="activateParams"
+              animate.enter="scale-fade-in"
+              animate.leave="scale-fade-out"
+            ></app-filter-label>
+          
+        }
+      </div>
+        <category-filter
+          (categoriesOutput)="onCategoriesResult($event)"
+        ></category-filter>
+    </div>
+    <div class="blog__articles">
+      @if (isLoading()) {
+        <app-loading></app-loading>
+      } @else if (articles() && articles()!.length > 0) {
+        @for (article of articles()!; track article.id) {
+          <article-card
+            [article]="article"
+            animate.enter="scale-fade-in"
+            animate.leave="scale-fade-out"
+          ></article-card>
+        }
+      } @else {
+        <span>Ничего не найдено</span>
+      }
+    </div>
+    @if (
+      categories().length > 0 && categories() && pages() && pages().length > 1
+    ) {
+      @defer (hydrate on interaction) {
+        <app-pagination
+          [activeParams]="activateParams"
+          [pages]="pages()"
+        ></app-pagination>
+      }
+    }
+  </div>
+</div>

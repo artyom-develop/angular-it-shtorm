@@ -1,0 +1,38 @@
+@if (category()) {
+  <div class="blog__filter-category" (click)="updateFilterParam(category().url)">
+    <span class="blog__filter-category-text" [class.disabled]="!isActive()">
+      {{ category().name }}
+    </span>
+    @if (!isActive()) {
+      <div class="blog__filter-category-disabled" >
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 11 11"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.46395 10.176V-2.47955e-05H5.97595V10.176H4.46395ZM-5.37038e-05 5.80798V4.39198H10.4399V5.80798H-5.37038e-05Z"
+            fill="#BEBEBE"
+          />
+        </svg>
+      </div>
+    } @else {
+      <div class="blog__filter-category-enable">
+        <svg
+          width="7"
+          height="2"
+          viewBox="0 0 7 2"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.8651e-05 1.48799V-1.45435e-05H6.28806V1.48799H5.8651e-05Z"
+            fill="#071739"
+          />
+        </svg>
+      </div>
+    }
+  </div>
+}

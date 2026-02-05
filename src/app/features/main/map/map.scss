@@ -1,0 +1,55 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.map {
+  padding: 60px 0 120px 0;
+  .container {
+    padding-right: 106px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 26px;
+    .map__content {
+      vertical-align: bottom;
+    }
+    .map__text {
+      .map__text-title {
+        @include lora-title(38px);
+        margin-bottom: 20px;
+      }
+      .map__items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .map__item {
+          .map__item-title {
+            font-family: $montserrat-medium;
+            font-size: 20px;
+            color: #709fdc;
+            margin-bottom: 10px;
+          }
+
+          .map__item-descr {
+            font-family: $montserrat-regular;
+            font-size: 14px;
+            line-height: 130%;
+            color: #071739;
+            max-width: 501px;
+          }
+          .map__item-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            a {
+              svg {
+                width: 30px;
+                height: 30px;
+                
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

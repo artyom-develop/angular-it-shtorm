@@ -1,6 +1,8 @@
 @use 'variables' as *;
 
 .header {
+  flex-shrink: 0; // Не сжимается
+
   background-color: $white;
   .container {
     padding: 40px 0;
@@ -24,11 +26,25 @@
         font-size: 16px;
         font-family: $montserrat-medium;
         color: $base-color;
-
+        list-style: none;
+        li{
+            text-decoration: none;
+            &::after{
+              content: '';
+            
+            }
+             &::before{
+              content: '';
+            
+            }
+        }
         a {
           transition: all 0.3s ease;
           color: $base-color;
           &:hover {
+            color: $second-color;
+          }
+          &.active {
             color: $second-color;
           }
           white-space: nowrap;
@@ -65,12 +81,12 @@
         font-family: $montserrat-medium;
         font-size: 16px;
       }
-      .header__profile-btn{
-         position: absolute;
-         width: 100%;
-         top: 30px;
-         left: 0;
-         cursor:pointer;
+      .header__profile-btn {
+        position: absolute;
+        width: 100%;
+        top: 30px;
+        left: 0;
+        cursor: pointer;
       }
     }
   }

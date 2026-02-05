@@ -1,6 +1,8 @@
 @use 'variables' as *;
 
 .footer {
+  flex-shrink: 0; // Не сжимается
+
   background-color: $footer_bg-color;
   .container {
     padding: 40px 0 54px 0;
@@ -27,11 +29,21 @@
           align-items: center;
           gap: 20px;
           font-size: 16px;
-
+          li {
+            &::before {
+              content: '';
+            }
+            &::after {
+              content: '';
+            }
+          }
           a {
             transition: all 0.3s ease;
             color: $base-color;
             &:hover {
+              color: $second-color;
+            }
+            .active {
               color: $second-color;
             }
           }
@@ -45,7 +57,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-				max-width: 253px;
+        max-width: 253px;
         .footer__info-title {
           font-family: $montserrat-medium;
           color: $second-color;
@@ -53,15 +65,15 @@
         .footer__info-text {
           line-height: 130%;
         }
-        .footer__socials{
+        .footer__socials {
           display: flex;
           align-items: center;
-          gap:12px;
+          gap: 12px;
           margin-top: 5px;
         }
       }
     }
-    .footer__rights{
+    .footer__rights {
       margin-top: 6px;
       color: $second-color;
       font-family: $montserrat-medium;

@@ -60,12 +60,13 @@
       position: relative;
 
       .offers__list {
+        overflow-y: hidden;
         position: absolute;
-        top: 56px;
+        top: 52px;
         left: 0;
         width: 422px;
         max-height: 150px;
-        overflow-y: auto;
+      
         border: 1.5px solid #709fdc;
         border-radius: 5px;
         background: $white;
@@ -80,7 +81,8 @@
           cursor: pointer;
           transition: background-color 0.2s ease;
           &:hover {
-            background-color: #e8f0ff;
+            background-color: $second-color;
+            color: $white;
           }
         }
       }
@@ -91,9 +93,9 @@
       gap: 5px;
       .modal__form-input {
         @include input(422px);
-        &.offers-input{
-					color: $second-color;
-				}
+        &.offers-input {
+          color: $second-color;
+        }
       }
     }
     .modal__form-btn {
@@ -108,7 +110,9 @@
       color: red;
       text-align: center;
       margin-top: -10px;
-			max-width :422px;
+      max-width: 422px;
     }
   }
 }
+
+

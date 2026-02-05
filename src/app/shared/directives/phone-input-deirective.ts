@@ -34,11 +34,10 @@ export class PhoneInputDeirective {
         formatted += '-' + value.slice(9, 11);
       }
     }
-     this.ngControl.control?.patchValue(formatted, { emitEvent: false });
+    this.ngControl.control?.patchValue(formatted, { emitEvent: false });
     input.value = formatted;
 
     const cursorPosition = formatted.length;
     input.setSelectionRange(cursorPosition, cursorPosition);
-    
   }
 }

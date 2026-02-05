@@ -1,0 +1,28 @@
+<section class="advantages" id='advantages'>
+  <div class="container">
+      <img src="assets/images/main/advantages/main.png" alt="" />
+
+    <div class="advantages__content">
+      <div class="advantages__content-title">Кто мы и чем мы занимаемся?</div>
+      <div class="advantages__content-description">
+        <span>АйтиШторм</span> — это ваш помощник №1 при решении таких вопросов, как
+        продвижение в сети, разработка сайтов для бизнеса и личного бренда,
+        сторисмейкинг, копирайтинг, маркетинг, разработка визуальной концепции и
+        создание инфопродуктов. Компания была основана в 2019 году и за всё это
+        время смогла выйти в ТОП-10 агенств, предлагающих услуги продвижения в
+        сети.
+      </div>
+      <div class="advantages__our">
+        <div class="advantages__our-title">Наши преимущества</div>
+        <div class="advantages__our-list">
+          @for (item of advantagesArray; track $index) {
+            <div class="advantages__item">
+              <div class="advantages__item-number">{{$index + 1}}</div>
+              <div class="advantages__item-text">{{item.BoldText}}<span>{{item.normalText}}</span></div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

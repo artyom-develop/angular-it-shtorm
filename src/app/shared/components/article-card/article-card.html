@@ -1,0 +1,18 @@
+<div class="popular__items-item">
+  <div class="popular__items-img">
+    <img [src]="environment.staticPath + article.image" [alt]="article.title" />
+    <div class="popular__item-label">{{ article.category }}</div>
+  </div>
+
+  <div class="popular__item-title">
+    {{ article.title | formatTextSlice: 50 }}
+  </div>
+  <div class="popular__item-description">
+    {{ article.description | formatTextSlice: 200 }}...
+  </div>
+  <div class="popular__item-action">
+    <a [routerLink]="['/article', article.url]" class="popular__item-link"
+      >Читать дальше</a
+    >
+  </div>
+</div>
